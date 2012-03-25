@@ -24,7 +24,7 @@ class AppController extends Controller {
      * @see Controller::beforeFilter()
      */
     function beforeFilter() {
-        $this->Auth->allow('display');
+        $this->Auth->allow();
  		$this->_sdp_init();
 	}
 	
