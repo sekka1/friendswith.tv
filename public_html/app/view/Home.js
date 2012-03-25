@@ -32,15 +32,14 @@ Ext.define('FTV.view.Home', {
                     ]
                 },{
                     xtype: 'button',
-                    iconCls: 'locate4',
+                    iconCls: 'ico-check',
                     ui: 'rounded',
-                    action: 'share',
-                    iconMask: true
+                    action: 'checkin'
                 },{
                     xtype: 'button',
                     iconCls: 'ico-arrow',
                     ui: 'rounded',
-                    action: 'checkin'
+                    action: 'share'
                 }]
             },{
                 xtype: 'playercontrol'

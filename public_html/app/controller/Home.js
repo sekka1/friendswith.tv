@@ -66,9 +66,16 @@ Ext.define('FTV.controller.Home', {
 	    });
 	},
 	
-	onBtnCheckinTap: function() {
+	onBtnCheckinTap: function(btn) {
 	    var view,
 	        context = this.getApplication().deviceContext;
+
+	    if (btn.getUi() === 'rounded action') {
+	        btn.setUi('rounded');
+	        return;
+	    }
+	    
+	    btn.setUi('rounded action');
 	    
 	    view = Ext.Viewport.add({ 
 	        xtype: 'checkinview',
