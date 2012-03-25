@@ -7,7 +7,7 @@ class AppController extends Controller {
         'Session',
     	'RequestHandler',
         'Auth' => array(
-            'loginRedirect' => '/',
+            'loginRedirect' => '/mobile',
             'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home'),
     		'authError'=>'Please Login',
             'ajaxLogin'=>'login',
