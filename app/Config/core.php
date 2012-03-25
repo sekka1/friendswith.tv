@@ -32,7 +32,7 @@
  * In production mode, flash messages redirect after a time interval.
  * In development mode, you need to click the flash message to continue.
  */
-	Configure::write('debug', 2);
+	Configure::write('debug', 1);
 
 /**
  * Configure the Error handler used to handle errors for your application.  By default
@@ -330,6 +330,14 @@ Cache::config('_cake_model_', array(
 	'path' => CACHE . 'models' . DS,
 	'serialize' => ($engine === 'File'),
 	'duration' => $duration
+));
+
+Cache::config('content', array(
+    'engine' => 'File',
+    'duration' => '+1 week',
+    'probability' => 100,
+	'prefix' => 'content_',	
+    //'path' => CACHE . 'long' . DS,
 ));
 
 require_once 'fwt.php';

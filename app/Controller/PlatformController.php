@@ -35,6 +35,7 @@ class PlatformController extends AppController {
 	function _cache_content($content_id = null){
 		$key=md5($this->here);
 		
+		
 	}
 }
 ?>

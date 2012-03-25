@@ -291,8 +291,14 @@ class SDPWeb {
     public function getPlatformContent($contentId, $parameters = null) {
         $URL = $this->appInterfaceURL . '/platform/content/' . $contentId;
         $this->appendParametersTo($URL, $parameters);
-        $xml = $this->web->httpGet($URL);
-        return new SimpleXMLElement($xml);
+        $key = md5($URL);
+        if(($xml=Cache::read($key,'content'))!==false){
+        	return new SimpleXMLElement($xml);
+        }else{
+        	$xml = $this->web->httpGet($URL);
+        	Cache::write($key,$xml,'content');
+        	return new SimpleXMLElement($xml);
+        }
     }
 
     public function getPlatformContentChildrenList($contentId, $parameters = null, $limit = 0, $offset = 0) {
