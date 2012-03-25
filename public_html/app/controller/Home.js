@@ -8,6 +8,9 @@ Ext.define('FTV.controller.Home', {
 	    control: {
 	        'homeview button[action=share]': {
 	            tap: 'onBtnShareTap'
+	        },
+	        'homeview button[action=checkin]': {
+	            tap: 'onBtnCheckinTap'
 	        }
 	    }
 	},
@@ -23,6 +26,11 @@ Ext.define('FTV.controller.Home', {
 	},
 
 //app listeners
+
+    /**
+     * Fire the new device context into the application,
+     * and refreshes the view
+     */
 	updateView: function(deviceId, newContext, oldContext) {
 	    var me = this;
 	    
@@ -31,6 +39,8 @@ Ext.define('FTV.controller.Home', {
 	        Ext.Logger.log("updateView " + Ext.encode(newContext));
 	    }
 	    //</debug>
+	    
+	    me.getApplication().deviceContext = newContext;
 	    
         if (!me.getHomeView()) {
             Ext.Viewport.add({
@@ -51,8 +61,20 @@ Ext.define('FTV.controller.Home', {
 	
 //listeners
 	onBtnShareTap: function() {
-	    Ext.Viewport.add({ 
+        Ext.Viewport.add({ 
 	        xtype: 'shareview'
 	    });
+	},
+	
+	onBtnCheckinTap: function() {
+	    var view,
+	        context = this.getApplication().deviceContext;
+	    
+	    view = Ext.Viewport.add({ 
+	        xtype: 'checkinview',
+	        data: context
+	    });
+	    
+	    view.element.on('tap', view.destroy, view, {single: true});
 	}
 });

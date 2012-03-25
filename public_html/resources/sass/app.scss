@@ -1,4 +1,5 @@
 $include-default-icons: false; 
+$active-color: #8bb237;
 
 @import "misc/fonts";
 @import "sencha-touch/default/all";
@@ -17,8 +18,11 @@ $include-default-icons: false;
 @include sencha-form;
 // @include sencha-msgbox;
 
+@import "overrides";
 @import "ux/sliderfill";
 @import "widgets/buttons";
 @import "widgets/playercontrol";
 @import "misc/icons";
+@import "views/checkin";
 @import "views/home";
+@import "views/share";
