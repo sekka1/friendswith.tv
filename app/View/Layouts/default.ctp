@@ -8,6 +8,7 @@
 	<?php
 		echo $this->Html->meta('icon');
 		echo $this->Html->css('style');
+		echo $this->Html->script('SDPWeb');
 		echo $scripts_for_layout;
 		//6495ED
 	?>
