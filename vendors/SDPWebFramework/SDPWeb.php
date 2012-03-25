@@ -122,7 +122,7 @@ class SDPWeb {
 	function perform_auth_action() {
 		if (isset($_GET['code'])) {
 			$this->authorize($_GET['code']);
-			header('Location: index.php');
+			//header('Location: index.php');
 			exit(); // if redirecting, don't continue executing PHP or JavaScript code
 		} else if (isset($_GET['logout'])) {
 			$this->deauthorize();
@@ -519,10 +519,9 @@ class SDPWeb {
 	public function devices() {
 		if (!isset($this->devices)) {
 			$this->devices = array();
-
 			try {
 				$deviceNodes = $this->getDevices(100, 0);
-
+								
 				if ($deviceNodes) {
 					foreach ($deviceNodes as $deviceNode) {
 						$deviceId = $deviceNode['id'];
@@ -533,7 +532,7 @@ class SDPWeb {
 
 			}
 		}
-
+		
 		return $this->devices;
 	}
 

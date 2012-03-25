@@ -1,6 +1,6 @@
 <?php
 
-require_once 'SDPDevice.php';
+
 require_once 'SDPWeb.php';
 
 /*

@@ -2,7 +2,7 @@
 //require_once 'shared.php';
 $this->Html->scriptStart(array('inline' => false));
 ?>
-window.onload = (function(){ incrementPosition(); longpoll();  });
+window.onload = (function(){  incrementPosition(); longpoll(); });
 window.onunload = (function(){ unsubscribe(); });
 <?php 
 $this->Html->scriptEnd(); 

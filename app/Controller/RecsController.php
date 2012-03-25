@@ -5,7 +5,7 @@ class RecsController extends AppController {
 	
 	function index(){
 		//$this->paginate['Rec']['order'] = array('created'=>-1);
-		$conditions = array();
+		$conditions = array('user_to_id'=>$this->Auth->user('id'));
 		$recs = $this->Rec->find('all',compact('conditions'));
 		$this->set(compact('recs'));
 	}
@@ -26,6 +26,10 @@ class RecsController extends AppController {
 				echo '0';
 			}
 		}
+	}
+	
+	function view($id){
+		$this->autoRender = false;
 	}
 }
 ?>

@@ -132,15 +132,10 @@ div.actions h3 {
 
 /** Tables **/
 table {
-	border-right:0;
 	clear: both;
 	color: #333;
-	margin-bottom: 10px;
-	width: 100%;
 }
 th {
-	border:0;
-	border-bottom:2px solid #555;
 	text-align: left;
 	padding:4px;
 }
@@ -156,13 +151,7 @@ th a.desc:after {
 	content: ' ⇡';
 }
 table tr td {
-	padding: 6px;
-	text-align: left;
 	vertical-align: top;
-	border-bottom:1px solid #ddd;
-}
-table tr:nth-child(even) {
-	background: #f9f9f9;
 }
 td.actions {
 	text-align: center;
