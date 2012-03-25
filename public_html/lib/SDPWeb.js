@@ -149,9 +149,16 @@ function longpoll() {
                longpoll();
            },
            failure: function(request) {
-               if (request.status === 403) {
+               if (request.status === 403) 
+               {
                    alert('403 long poll error');
-               } else {
+               } 
+               else if(request.status === 500) 
+               {
+                   alert('500 long poll error');
+               } 
+               else 
+               {
                    longpoll();
                }
            }
