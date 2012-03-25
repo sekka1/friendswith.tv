@@ -123,7 +123,7 @@ class SDPWeb {
 		if (isset($_GET['code'])) {
 			$this->authorize($_GET['code']);
 			//header('Location: index.php');
-			exit(); // if redirecting, don't continue executing PHP or JavaScript code
+			//exit(); // if redirecting, don't continue executing PHP or JavaScript code
 		} else if (isset($_GET['logout'])) {
 			$this->deauthorize();
 		}
