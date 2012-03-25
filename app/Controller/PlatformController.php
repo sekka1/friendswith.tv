@@ -7,12 +7,15 @@ class PlatformController extends AppController {
 
 		$contentXml = $this->sdp->getPlatformContent($content_id);
 		//debug($contentXml->asXML());
-		//die();
-		//debug($this->sdp);
-		//debug($devices);
 		//debug($contentXml);
-		//$this->set('sdp',$this->sdp); 
-		//$this->set(compact('contentXml'));
+		$content = array();
+		foreach($contentXml->attributes() as $a => $b){
+			$content[$a] = $b;
+		}
+		$content['title'] = $contentXml->content->title;
+		$content['synopsis'] = $contentXml->content->synopsis;
+		//die();
+		$this->set(compact('content'));
 	}
 	function action(){
 		$this->autoRender = false;
