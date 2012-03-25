@@ -10,13 +10,20 @@ class PlatformController extends AppController {
 		//$oContent = new SDP_Content($contentXml);
 		//debug($contentXml->asXML());
 		//debug($contentXml);
-		$content = array();
+		$content = array('type'=>null);
 		foreach($contentXml->attributes() as $a => $b){
 			$content[$a] = (string) $b;
 		}
-		$this->log(var_export($contentXml,true));
-		$content['title'] = (string)$contentXml->content->title;
-		$content['synopsis'] =(string) $contentXml->content->synopsis;
+		
+		//$this->log(print_r($contentXml,true));
+		
+		switch($content['type']){
+			default:
+				$content['title'] = (string)$contentXml->content->title;
+				$content['synopsis'] =(string) $contentXml->synopsis;
+		}
+		
+		//yearOfRelease
 		//die();
 		$this->set(compact('content'));
 	}
