@@ -59,6 +59,7 @@
  */
 class DATABASE_CONFIG {
 
+	/*
 	public $default = array(
         'datasource' => 'Mongodb.MongodbSource',
         'host' => 'localhost',
@@ -66,27 +67,19 @@ class DATABASE_CONFIG {
         'port' => 27017,
         'prefix' => '',
         'persistent' => 'true',
-        /* optional auth fields
-        'login' => 'mongo', 
-        'password' => 'awesomeness',
-        'replicaset' => array('host' => 'mongodb://hoge:hogehoge@localhost:27021,localhost:27022/blog', 
-                              'options' => array('replicaSet' => 'myRepl')
-                     ),
-        */
     );
+	*/
 	
-    /*
 	public $default = array(
 		'datasource' => 'Database/Mysql',
 		'persistent' => false,
 		'host' => 'localhost',
-		'login' => 'user',
-		'password' => 'password',
-		'database' => 'database_name',
+		'login' => 'root',
+		'password' => 'sunshine',
+		'database' => 'FriendsWithTv',
 		'prefix' => '',
 		//'encoding' => 'utf8',
 	);
-	*/
 
 	public $test = array(
 		'datasource' => 'Database/Mysql',

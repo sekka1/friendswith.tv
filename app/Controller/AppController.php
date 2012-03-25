@@ -3,9 +3,29 @@ require_once(ROOT.DS.'vendors'.DS.'SDPWebFramework'.DS.'SDPWeb.php');
 class AppController extends Controller {
 	
 	public $sdpLoggedIn = false;
-	
-	function beforeFilter(){
-		$this->_sdp_init();
+    public $components = array(
+        'Session',
+    	'RequestHandler',
+        'Auth' => array(
+            'loginRedirect' => '/',
+            'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home'),
+    		'authError'=>'Please Login',
+            'ajaxLogin'=>'login',
+     		'authenticate' => array(
+            	'Form' => array(
+                	'fields' => array('username' => 'name'),
+            	)
+        	)
+        ),
+    );
+
+    /**
+     * (non-PHPdoc)
+     * @see Controller::beforeFilter()
+     */
+    function beforeFilter() {
+        $this->Auth->allow('display');
+ 		$this->_sdp_init();
 	}
 	
 	
@@ -19,5 +39,7 @@ class AppController extends Controller {
 		$this->sdp = $sdp;
 		$this->set(compact('sdp'));
 	}
+	
+	
 }
 ?>
