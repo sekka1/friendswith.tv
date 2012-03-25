@@ -1,4 +1,3 @@
-(function(){
 /*
 
 Functions in this script call a PHP proxy called /device/action that should have one method call:
@@ -164,44 +163,32 @@ function didLongpoll() {
 
             if (device && newContext) {
 				if (newContext['channelId'] && device['channelId'] != newContext['channelId']) {
-	                if (window.channelDidChange) {
-	                    channelDidChange(deviceId, device['channelId'], newContext['channelId'], newContext['channelNumber'], newContext['channelName'], newContext['channelImage']);
-	                }
+	                Application.fireEvent('channelchange', deviceId, newContext, device);
 	                device['channelId'] = newContext['channelId'];
 	            }
 
 				if (newContext['contentId'] && device['contentId'] != newContext['contentId']) {
-	                if (window.contentDidChange) {
-	                    contentDidChange(deviceId, device['contentId'], newContext['contentId'], newContext['contentTitle'], newContext['seriesTitle'], newContext['contentImage']);
-	                }
+				    Application.fireEvent('contentchange', deviceId, newContext, device);
 	                device['contentId'] = newContext['contentId'];
 	            }
 
 	            if (newContext['scheduleId'] && device['scheduleId'] != newContext['scheduleId']) {
-	                if (window.scheduleDidChange) {
-	                    scheduleDidChange(deviceId, device['scheduleId'], newContext['scheduleId']);
-	                }
+	                Application.fireEvent('schedulechange', deviceId, newContext, device);
 	                device['scheduleId'] = newContext['scheduleId'];
 	            }
 
 	            if (newContext['plannerId'] && device['plannerId'] != newContext['plannerId']) {
-	                if (window.plannerDidChange) {
-	                    plannerDidChange(deviceId, device['plannerId'], newContext['plannerId']);
-	                }
+	                Application.fireEvent('plannerchange', deviceId, newContext, device);
 	                device['plannerId'] = newContext['plannerId'];
 	            }
 
 	            if (device['position'] != newContext['position']) {
-	                if (window.positionDidChange) {
-	                    positionDidChange(deviceId, device['position'], newContext['position']);
-	                }
+	                Application.fireEvent('positionchange', deviceId, newContext, device);
 	                device['position'] = newContext['position'];
 	            }
 
 	            if (device['playbackSpeed'] != newContext['playbackSpeed']) {
-	                if (window.playbackSpeedDidChange) {
-	                    playbackSpeedDidChange(deviceId, device['playbackSpeed'], newContext['playbackSpeed']);
-	                }
+	                Application.fireEvent('playbackspeedchange', deviceId, newContext, device);
 	                device['playbackSpeed'] = newContext['playbackSpeed'];
 	            }
 			}
@@ -270,5 +257,3 @@ function zeroPad(num,count) {
 Ext.define('SDPWeb', {
     singleton: true
 });
-
-}());

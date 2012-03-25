@@ -17,26 +17,35 @@ Ext.define('FTV.controller.Home', {
 	    
 	    me.getApplication().on({
 	        scope: me,
-	        'displayshow': me.onDisplayShow
+	        'deviceready': me.updateView,
+	        'channelchange': me.updateView
 	    });
 	},
 
 //app listeners
-	onDisplayShow: function(showId) {
-	    this.getHomeView().element.applyStyles({
-	        'background-image': 'url(resources/images/shows_mock/blackswan.png)'
+	updateView: function(deviceId, newContext, oldContext) {
+	    var me = this;
+	    
+	    //<debug>
+	    if (Ext.Logger.log) {
+	        Ext.Logger.log("updateView " + Ext.encode(newContext));
+	    }
+	    //</debug>
+	    
+        if (!me.getHomeView()) {
+            Ext.Viewport.add({
+                xtype:'homeview'
+            });
+        }
+
+	    me.getHomeView().element.applyStyles({
+	        'background-image': 'url(' + newContext.contentImage + ')'
 	    });
-	    /*
-	    this.getShowHeader().setData({
-            showTitle: 'Black Swan',
+	    
+	    me.getShowHeader().setData({
+            showTitle: newContext.seriesTitle,
             season: 1,
             episode: 3
-        });*/
-        
-        this.getShowHeader().setData({
-            showTitle: 'Black Swan',
-            year: 2011,
-            star: 'Natalie Portman'
         });
 	},
 	
