@@ -9,6 +9,7 @@ Ext.Loader.setPath({
 Ext.require([
     'Ext.carousel.Carousel',
     'Ext.data.JsonP',
+    'Ext.data.JsonStore',
     'Ext.field.Slider',
     'Ext.MessageBox',
     'Ext.PlayerControl',
@@ -20,9 +21,11 @@ Ext.require([
 Ext.application({
     name: 'FTV',
     controllers: [
-		'Home'
+		'Home',
+		'Share'
 	],
     views: [
+        'CheckIn',
 		'Home',
 		'Share'
 	],
@@ -34,16 +37,29 @@ Ext.application({
     },
     phoneStartupScreen: 'resources/loading/Homescreen.jpg',
     tabletStartupScreen: 'resources/loading/Homescreen~ipad.jpg',
-
+ 
     launch: function() {
+
+        //expose application instance
+        window.Application = this;
+        
+        //SDPWeb connection
+        incrementPosition(); 
+        longpoll();
+        window.onunload = unsubscribe;
+        
         // Destroy the #appLoadingIndicator element
         Ext.fly('appLoadingIndicator').destroy();
 
-        // Initialize the main view
-        Ext.Viewport.add(Ext.create('FTV.view.Home'));
+        //get the first device
+        var deviceId, device;
+        for(deviceId in devices) {
+            device = devices[deviceId];
+            break;
+        }
         
-        //mock
-        this.fireEvent('displayshow', 1);
+        //fire event
+        this.fireEvent('deviceready', deviceId, device);
     },
 
     onUpdated: function() {

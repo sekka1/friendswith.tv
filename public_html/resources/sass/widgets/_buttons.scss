@@ -6,6 +6,7 @@
     .x-button-icon, .x-button-icon.x-icon-mask {
         width: 3.1em;
         height: 3.1em;
+        background-size: 3.1em;
     }
     .x-button-icon.x-icon-mask {
         background-color: #fff;
@@ -30,4 +31,8 @@
         background-image: none;
         -webkit-mask-size: 1em;
     }
+}
+
+.x-button-square {
+    border-radius: 0;
 }

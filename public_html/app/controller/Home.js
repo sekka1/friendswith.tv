@@ -8,6 +8,9 @@ Ext.define('FTV.controller.Home', {
 	    control: {
 	        'homeview button[action=share]': {
 	            tap: 'onBtnShareTap'
+	        },
+	        'homeview button[action=checkin]': {
+	            tap: 'onBtnCheckinTap'
 	        }
 	    }
 	},
@@ -17,33 +20,68 @@ Ext.define('FTV.controller.Home', {
 	    
 	    me.getApplication().on({
 	        scope: me,
-	        'displayshow': me.onDisplayShow
+	        'deviceready': me.updateView,
+	        'channelchange': me.updateView
 	    });
 	},
 
 //app listeners
-	onDisplayShow: function(showId) {
-	    this.getHomeView().element.applyStyles({
-	        'background-image': 'url(resources/images/shows_mock/blackswan.png)'
+
+    /**
+     * Fire the new device context into the application,
+     * and refreshes the view
+     */
+	updateView: function(deviceId, newContext, oldContext) {
+	    var me = this;
+	    
+	    //<debug>
+	    if (Ext.Logger.log) {
+	        Ext.Logger.log("updateView " + Ext.encode(newContext));
+	    }
+	    //</debug>
+	    
+	    me.getApplication().deviceContext = newContext;
+	    
+        if (!me.getHomeView()) {
+            Ext.Viewport.add({
+                xtype:'homeview'
+            });
+        }
+
+	    me.getHomeView().element.applyStyles({
+	        'background-image': 'url(' + newContext.contentImage + ')'
 	    });
-	    /*
-	    this.getShowHeader().setData({
-            showTitle: 'Black Swan',
+	    
+	    me.getShowHeader().setData({
+            showTitle: newContext.seriesTitle,
             season: 1,
             episode: 3
-        });*/
-        
-        this.getShowHeader().setData({
-            showTitle: 'Black Swan',
-            year: 2011,
-            star: 'Natalie Portman'
         });
 	},
 	
 //listeners
 	onBtnShareTap: function() {
-	    Ext.Viewport.add({ 
+        Ext.Viewport.add({ 
 	        xtype: 'shareview'
 	    });
+	},
+	
+	onBtnCheckinTap: function(btn) {
+	    var view,
+	        context = this.getApplication().deviceContext;
+
+	    if (btn.getUi() === 'rounded action') {
+	        btn.setUi('rounded');
+	        return;
+	    }
+	    
+	    btn.setUi('rounded action');
+	    
+	    view = Ext.Viewport.add({ 
+	        xtype: 'checkinview',
+	        data: context
+	    });
+	    
+	    view.element.on('tap', view.destroy, view, {single: true});
 	}
 });
