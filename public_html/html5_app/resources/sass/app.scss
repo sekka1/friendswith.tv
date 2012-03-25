@@ -1,0 +1,24 @@
+$include-default-icons: false; 
+
+@import "misc/fonts";
+@import "sencha-touch/default/all";
+
+@include sencha-panel;
+@include sencha-buttons;
+// @include sencha-sheet;
+// @include sencha-picker;
+// @include sencha-tabs;
+// @include sencha-toolbar;
+@include sencha-toolbar-forms;
+// @include sencha-indexbar;
+// @include sencha-list;
+@include sencha-layout;
+@include sencha-carousel;
+@include sencha-form;
+// @include sencha-msgbox;
+
+@import "ux/sliderfill";
+@import "widgets/buttons";
+@import "widgets/playercontrol";
+@import "misc/icons";
+@import "views/home";
