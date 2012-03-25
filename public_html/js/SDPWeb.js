@@ -150,9 +150,10 @@ function longpoll() {
 function didLongpoll() {
     if (longpollRequest.readyState == 4) {
         if (longpollRequest.status == 200) {
+        	console.log(longpollRequest);
 			// console.log('JSON message: ' + longpollRequest.responseText);
 			message = JSON.parse(longpollRequest.responseText);
-
+			//console.log(message);
             var deviceId = message['deviceId'];
 			var newContext = message['context'];
 
@@ -203,6 +204,7 @@ function didLongpoll() {
 	                }
 	                device['playbackSpeed'] = newContext['playbackSpeed'];
 	            }
+	            
 			}
         }
 

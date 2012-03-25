@@ -17,6 +17,7 @@ class AppController extends Controller {
 		$this->sdpLoggedIn = $sdp->loggedIn();
 		$this->set('sdpLoggedIn',$this->sdpLoggedIn);
 		$this->sdp = $sdp;
+		$this->set(compact('sdp'));
 	}
 }
 ?>

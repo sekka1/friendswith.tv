@@ -27,8 +27,8 @@ foreach ($sdp->devices() as $deviceId => $device) {
 		$seriesTitle = isset($context['seriesTitle']) ? $context['seriesTitle'] : null;
 		if ($seriesTitle && $seriesTitle != $contentTitle) $contentTitle = $seriesTitle . "<br>" . $contentTitle;
 
-		$contentImage = isset($context['contentImage']) ? $context['contentImage'] : 'images/generic.jpg';
-		$channelImage = isset($context['channelImage']) ? $context['channelImage'] : 'images/spacer.png';
+		$contentImage = isset($context['contentImage']) ? $context['contentImage'] : '/img/generic.jpg';
+		$channelImage = isset($context['channelImage']) ? $context['channelImage'] : '/img/spacer.png';
 
 		$contentTable = "<table id=\"contentTable-$deviceId\" style=\"background-image:url('$contentImage');\" border=\"0\" cellspacing=\"0\" cellpadding=\"5\" width=\"267\" height=\"200\">";
 		$contentTable .= "<tr><td valign=\"top\" height=\"95%\"><img id=\"channelImage-$deviceId\" border=\"0\" src=\"$channelImage\" width=\"64\" height=\"32\"></td></tr>";
@@ -52,7 +52,7 @@ foreach ($sdp->devices() as $deviceId => $device) {
 		echo("<tr><td class=\"nopadding\" colspan=\"2\" height=\"50\" align=\"center\" valign=\"middle\">$controlTable</td></tr>");
 		debug($context);
 	} else {
-	    echo("<tr><td class=\"nopadding\" colspan=\"2\"><img width=\"267\" height=\"200\" src=\"images/generic.jpg\"></td></tr>");
+	    echo("<tr><td class=\"nopadding\" colspan=\"2\"><img width=\"267\" height=\"200\" src=\"/img/generic.jpg\"></td></tr>");
 		echo("<tr class=\"header\"><td>&nbsp;</td><td align=\"right\">&nbsp;</td></tr>");
 		echo("<tr><td class=\"nopadding\" colspan=\"2\" height=\"50\">&nbsp;</td></tr>");
 	}
