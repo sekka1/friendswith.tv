@@ -27,6 +27,7 @@ Ext.application({
     views: [
         'CheckIn',
         'ContentInfo',
+        'FacebookComments',
 		'Home',
 		'Share'
 	],
