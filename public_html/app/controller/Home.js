@@ -3,7 +3,9 @@ Ext.define('FTV.controller.Home', {
 	config: {
 	    refs: {
 	        homeView: 'homeview',
-	        showHeader: 'homeview #show-header'
+	        contentInfoCard: 'homeview contentinfo',
+	        showHeader: 'homeview #show-header',
+	        playerControl: 'homeview playercontrol'
 	    },
 	    control: {
 	        'homeview button[action=share]': {
@@ -20,27 +22,37 @@ Ext.define('FTV.controller.Home', {
 	    
 	    me.getApplication().on({
 	        scope: me,
-	        'deviceready': me.updateView,
-	        'channelchange': me.updateView
+	        'deviceready': me.onDeviceReady,
+	        'channelchange': me.updateView,
+	        'durationchange': me.updatePlayer,
+	        'positionchange': me.updatePlayer
 	    });
 	},
 
 //app listeners
 
+    onDeviceReady: function(deviceId, context) {
+        this.updateView(deviceId, context);
+        this.updatePlayer(deviceId, context);
+        
+        //SDPWeb connection
+        incrementPosition();
+    },
+    
     /**
      * Fire the new device context into the application,
      * and refreshes the view
      */
-	updateView: function(deviceId, newContext, oldContext) {
+	updateView: function(deviceId, context) {
 	    var me = this;
 	    
 	    //<debug>
 	    if (Ext.Logger.log) {
-	        Ext.Logger.log("updateView " + Ext.encode(newContext));
+	        Ext.Logger.log("updateView " + Ext.encode(context));
 	    }
 	    //</debug>
 	    
-	    me.getApplication().deviceContext = newContext;
+	    me.getApplication().deviceContext = context;
 	    
         if (!me.getHomeView()) {
             Ext.Viewport.add({
@@ -49,21 +61,28 @@ Ext.define('FTV.controller.Home', {
         }
 
 	    me.getHomeView().element.applyStyles({
-	        'background-image': 'url(' + newContext.contentImage + ')'
+	        'background-image': 'url(' + context.contentImage + ')'
 	    });
 	    
-	    me.getShowHeader().setData({
-            showTitle: newContext.seriesTitle,
-            season: 1,
-            episode: 3
-        });
+	    me.getShowHeader().setData(context);
+	    me.getContentInfoCard().setData(context);
+	},
+	
+	/**
+     * Fire the new device context into the application,
+     * and refreshes the view
+     */
+	updatePlayer: function(deviceId, context) {
+	    this.getPlayerControl().updateSlider(context.position, context.duration);
 	},
 	
 //listeners
 	onBtnShareTap: function() {
-        Ext.Viewport.add({ 
+        var view = Ext.Viewport.add({ 
 	        xtype: 'shareview'
 	    });
+
+	    view.down('#header').setData(this.getApplication().deviceContext);
 	},
 	
 	onBtnCheckinTap: function(btn) {

@@ -8,6 +8,7 @@ Ext.define('FTV.view.Share', {
         hideOnMaskTap: true,
         items: [{
             xtype: 'container',
+            itemId: 'header',
             cls: 'header',
             data: {
                 contentImage: 'resources/images/shows_mock/blackswan_poster.png',

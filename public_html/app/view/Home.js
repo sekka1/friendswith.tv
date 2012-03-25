@@ -22,7 +22,7 @@ Ext.define('FTV.view.Home', {
                     cls: 'show-header',
                     flex: 1,
                     tpl: [
-                        '<h1>{showTitle}</h1>',
+                        '<h1>{[values.showTitle||values.contentTitle]}</h1>',
                         '<tpl if="season">',
                             '<h2>Season {season}, Episode {episode}',
                         '</tpl>',
@@ -49,7 +49,7 @@ Ext.define('FTV.view.Home', {
             ui: 'light',
             flex: 1,
             items: [{
-                html: 'IMDB Data'
+                xtype: 'contentinfo'
             },{
                 html: 'View 2'
             },{

@@ -150,9 +150,8 @@ function longpoll() {
 function didLongpoll() {
     if (longpollRequest.readyState == 4) {
         if (longpollRequest.status == 200) {
-			// console.log('JSON message: ' + longpollRequest.responseText);
 			message = JSON.parse(longpollRequest.responseText);
-
+            
             var deviceId = message['deviceId'];
 			var newContext = message['context'];
 
@@ -162,34 +161,39 @@ function didLongpoll() {
 			var device = devices[deviceId];
 
             if (device && newContext) {
-				if (newContext['channelId'] && device['channelId'] != newContext['channelId']) {
-	                Application.fireEvent('channelchange', deviceId, newContext, device);
-	                device['channelId'] = newContext['channelId'];
-	            }
-
 				if (newContext['contentId'] && device['contentId'] != newContext['contentId']) {
-				    Application.fireEvent('contentchange', deviceId, newContext, device);
 	                device['contentId'] = newContext['contentId'];
+	                Application.fireEvent('contentchange', deviceId, newContext, device);
 	            }
 
 	            if (newContext['scheduleId'] && device['scheduleId'] != newContext['scheduleId']) {
-	                Application.fireEvent('schedulechange', deviceId, newContext, device);
 	                device['scheduleId'] = newContext['scheduleId'];
+	                Application.fireEvent('schedulechange', deviceId, newContext, device);
 	            }
 
 	            if (newContext['plannerId'] && device['plannerId'] != newContext['plannerId']) {
-	                Application.fireEvent('plannerchange', deviceId, newContext, device);
 	                device['plannerId'] = newContext['plannerId'];
+	                Application.fireEvent('plannerchange', deviceId, newContext, device);
 	            }
 
 	            if (device['position'] != newContext['position']) {
 	                Application.fireEvent('positionchange', deviceId, newContext, device);
 	                device['position'] = newContext['position'];
 	            }
+	            
+	            if (device['duration'] != newContext['duration']) {
+	                Application.fireEvent('durationchange', deviceId, newContext, device);
+	                device['duration'] = newContext['duration'];
+	            }
 
 	            if (device['playbackSpeed'] != newContext['playbackSpeed']) {
-	                Application.fireEvent('playbackspeedchange', deviceId, newContext, device);
 	                device['playbackSpeed'] = newContext['playbackSpeed'];
+	                Application.fireEvent('playbackspeedchange', deviceId, newContext, device);
+	            }
+	            
+	            if (newContext['channelId'] && device['channelId'] != newContext['channelId']) {
+	                device['channelId'] = newContext['channelId'];
+	                Application.fireEvent('channelchange', deviceId, newContext, device);
 	            }
 			}
         }
@@ -225,12 +229,8 @@ function incrementPosition() {
 
 		if (type != 'Off' && currentPlaybackSpeed != 0) {
 			var newPosition = currentPosition + currentPlaybackSpeed;
-
-			if (window.positionDidChange) {
-				positionDidChange(deviceId, currentPosition, newPosition);
-			}
-
 			device['position'] = newPosition;
+			Application.fireEvent('positionchange', deviceId, device);
 		}
 	}
 

@@ -26,6 +26,7 @@ Ext.application({
 	],
     views: [
         'CheckIn',
+        'ContentInfo',
 		'Home',
 		'Share'
 	],
@@ -44,7 +45,6 @@ Ext.application({
         window.Application = this;
         
         //SDPWeb connection
-        incrementPosition(); 
         longpoll();
         window.onunload = unsubscribe;
         

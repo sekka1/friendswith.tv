@@ -719,6 +719,9 @@ function contextForPlayout($playout) {
         $scheduleId = $scheduleInstance['id'];
 		if (isset($scheduleId)) $context['scheduleId'] = "$scheduleId";
 
+		$duration = $scheduleInstance->duration;
+		if (isset($duration)) $context['duration'] = "$duration";
+
 		$channel = $scheduleInstance->channel;
 		if (isset($channel)) {
 			$channelId = $channel['id'];
@@ -750,6 +753,10 @@ function contextForPlayout($playout) {
 
 			$contentImage = imageUrl($content);
 			if (isset($contentImage)) $context['contentImage'] = "$contentImage";
+			
+			$contentSynopsis = $content->synopsis;
+			if (isset($contentSynopsis)) $context['contentSynopsis'] = "$contentSynopsis";
+			
 		}
 	}
 
