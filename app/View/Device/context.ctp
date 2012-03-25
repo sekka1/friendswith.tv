@@ -23,6 +23,7 @@ foreach ($sdp->devices() as $deviceId => $device) {
     echo("<tr class=\"header\"><td>&nbsp;$deviceName</td><td align=\"right\">{$context['type']}&nbsp;</td></tr>");
 
 	if ($device->isOn()) {
+		$contentId = $context['contentId'];
 		$contentTitle = $context['contentTitle'];
 		$seriesTitle = isset($context['seriesTitle']) ? $context['seriesTitle'] : null;
 		if ($seriesTitle && $seriesTitle != $contentTitle) $contentTitle = $seriesTitle . "<br>" . $contentTitle;
@@ -32,7 +33,7 @@ foreach ($sdp->devices() as $deviceId => $device) {
 
 		$contentTable = "<table id=\"contentTable-$deviceId\" style=\"background-image:url('$contentImage');\" border=\"0\" cellspacing=\"0\" cellpadding=\"5\" width=\"267\" height=\"200\">";
 		$contentTable .= "<tr><td valign=\"top\" height=\"95%\"><img id=\"channelImage-$deviceId\" border=\"0\" src=\"$channelImage\" width=\"64\" height=\"32\"></td></tr>";
-		$contentTable .= "<tr><td class=\"schedule\" align=\"left\" valign=\"bottom\"><div id=\"contentTitle-$deviceId\" class=\"title\">$contentTitle</div></td></tr>";
+		$contentTable .= "<tr><td class=\"schedule\" align=\"left\" valign=\"bottom\"><div id=\"contentTitle-$deviceId\" class=\"title\"><a href=\"/platform/content/$contentId\">$contentTitle</a></div></td></tr>";
 		$contentTable .= "</table>";
 	    echo("<tr><td class=\"nopadding\" colspan=\"2\">$contentTable</td></tr>");
 

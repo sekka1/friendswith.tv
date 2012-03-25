@@ -12,17 +12,22 @@ class PlatformController extends AppController {
 		//debug($contentXml);
 		$content = array();
 		foreach($contentXml->attributes() as $a => $b){
-			$content[$a] = $b;
+			$content[$a] = (string) $b;
 		}
 		$this->log(var_export($contentXml,true));
-		$content['title'] = $contentXml->content->title;
-		$content['synopsis'] = $contentXml->content->synopsis;
+		$content['title'] = (string)$contentXml->content->title;
+		$content['synopsis'] =(string) $contentXml->content->synopsis;
 		//die();
 		$this->set(compact('content'));
 	}
 	function action(){
 		$this->autoRender = false;
 		$this->sdp->perform_action();
+	}
+	
+	function _cache_content($content_id = null){
+		$key=md5($this->here);
+		
 	}
 }
 ?>
