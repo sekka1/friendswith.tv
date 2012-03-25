@@ -60,9 +60,16 @@ Ext.define('FTV.controller.Home', {
             });
         }
 
-	    me.getHomeView().element.applyStyles({
-	        'background-image': 'url(' + context.contentImage + ')'
-	    });
+        //mock
+        if (context.contentId === "6962663") {
+            me.getHomeView().element.applyStyles({
+    	        'background-image': 'url(resources/images/shows_mock/blackswan.png)'
+    	    });
+        } else {
+            me.getHomeView().element.applyStyles({
+    	        'background-image': 'url(' + context.contentImage + ')'
+    	    });
+        }
 	    
 	    me.getShowHeader().setData(context);
 	    me.getContentInfoCard().setData(context);

@@ -140,15 +140,38 @@ function longpoll() {
 	        link += '&lastModified=' + lastModified;
 	    }
 
-	    longpollRequest = newRequest();
-	    longpollRequest.onreadystatechange = didLongpoll; // your app should implement this function
-	    longpollRequest.open('GET', link, true);
-	    longpollRequest.send();
+        Ext.Ajax.request({
+           url: link, 
+           method: 'GET',
+           success: function(request) {
+               longpollRequest = request;
+               didLongpoll();
+               longpoll();
+           },
+           failure: function(request) {
+               if (request.status === 403) 
+               {
+                   alert('403 long poll error');
+               } 
+               else if(request.status === 500) 
+               {
+                   alert('500 long poll error');
+               } 
+               else 
+               {
+                   longpoll();
+               }
+           }
+        });
+//	    longpollRequest = newRequest();
+//	    longpollRequest.onreadystatechange = didLongpoll; // your app should implement this function
+//	    longpollRequest.open('GET', link, true);
+//	    longpollRequest.send();
 	}
 }
 
 function didLongpoll() {
-    if (longpollRequest.readyState == 4) {
+//    if (longpollRequest.readyState == 4) {
         if (longpollRequest.status == 200) {
 			message = JSON.parse(longpollRequest.responseText);
             
@@ -196,11 +219,13 @@ function didLongpoll() {
 	                Application.fireEvent('channelchange', deviceId, newContext, device);
 	            }
 			}
-        }
+        //}
 
-		if (longpollRequest.status != 403) {
-        	longpoll();
-		}
+        // if (longpollRequest.status != 403) {
+        //          longpoll();
+        // } else {
+        //     alert('403!');
+        // }
     }
 }
 
