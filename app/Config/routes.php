@@ -28,6 +28,7 @@
 	Router::parseExtensions();
 	Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
 	Router::connect('/mobile', array('controller' => 'pages', 'action' => 'display', 'mobile'));
+	Router::connect('/dashboard', array('controller' => 'pages', 'action' => 'display', 'dashboard'));
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */

@@ -75,8 +75,8 @@ class DATABASE_CONFIG {
 		'persistent' => false,
 		'host' => 'localhost',
 		'login' => 'root',
-		'password' => 'sunshine',
-		'database' => 'FriendsWithTv',
+		'password' => '',
+		'database' => 'fwt',
 		'prefix' => '',
 		//'encoding' => 'utf8',
 	);
