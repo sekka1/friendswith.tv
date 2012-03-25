@@ -51,7 +51,7 @@ Ext.define('FTV.view.Home', {
             items: [{
                 xtype: 'contentinfo'
             },{
-                html: 'View 2'
+                xtype: 'facebookcommentsview'
             },{
                 html: 'View 3'
             }]
