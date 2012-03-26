@@ -32,6 +32,9 @@
 			<?php //echo $this->Html->link($this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),'http://www.cakephp.org/',	array('target' => '_blank', 'escape' => false)	);	?>
 		</div>
 	</div>
-	<?php echo $this->element('sql_dump'); ?>
+	<?php 
+		if(env('REMOTE_ADDR')!='127.0.0.1') echo $this->element('js/owa');
+		echo $this->element('sql_dump'); 
+	?>
 </body>
 </html>
