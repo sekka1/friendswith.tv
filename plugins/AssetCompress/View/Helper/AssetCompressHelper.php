@@ -125,7 +125,7 @@ class AssetCompressHelper extends AppHelper {
 		}
 		$files = array(
 			$this->params['controller'] . '.js',
-			$this->params['controller'] . '/' . $this->params['action'] . '.js'
+			$this->params['controller'] . DS . $this->params['action'] . '.js'
 		);
 
 		foreach ($files as $file) {
