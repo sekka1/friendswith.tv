@@ -3,6 +3,15 @@ require_once(ROOT.DS.'vendors'.DS.'SDPWebFramework'.DS.'SDPWeb.php');
 class AppController extends Controller {
 	
 	public $sdpLoggedIn = false;
+	
+	public $helpers = array(		
+		'Form',
+		'Html',
+		'Js',
+		'Session',
+	 	'AssetCompress.AssetCompress'
+	);
+	
     public $components = array(
         'Session',
     	'RequestHandler',
