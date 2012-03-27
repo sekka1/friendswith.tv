@@ -61,9 +61,9 @@
 			<?php echo $this->Session->flash(); ?>
 			<?php echo $content_for_layout; ?>
 		</div>
-		
     </div> <!-- /container -->
 	<?php 
+		if(env('REMOTE_ADDR')!='127.0.0.1') echo $this->element('js/owa');
 		echo $this->element('sql_dump'); 
 	?>
 </body>
