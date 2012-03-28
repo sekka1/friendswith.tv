@@ -1,7 +1,14 @@
 <?php 
 class DeviceController extends AppController {
 	
-	public $uses = array();
+	public $uses = array('Device');
+	
+	public $scaffold = 'admin';
+	
+	function beforeFilter(){
+		parent::beforeFilter();
+		$this->Auth->allow();
+	}
 	
 	function context(){
 		//$this->_sdp_init();
