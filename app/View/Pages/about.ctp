@@ -1,12 +1,12 @@
 <?php if (!$sdpLoggedIn): ?>
 <center>
-<img src="/img/splash_logo.png">
+<img src="<?php echo $this->webroot; ?>img/splash_logo.png">
 <br />
 <br />
-<a href="https://api.sdp.nds.com/oauth/authorize?client_id=<?php echo SDP_API_ID; ?>"><img src="/img/login_btn.png" onmouseover="javascript:this.src='/img/login_btn_hover.png'" onmouseout="javascript:this.src='/img/login_btn.png'"></a>
+<a href="https://api.sdp.nds.com/oauth/authorize?client_id=<?php echo SDP_API_ID; ?>"><img src="<?php echo $this->webroot; ?>img/login_btn.png" onmouseover="javascript:this.src='<?php echo $this->webroot; ?>img/login_btn_hover.png'" onmouseout="javascript:this.src='<?php echo $this->webroot; ?>img/login_btn.png'"></a>
 <br />
 <br />
-<img src="/img/testpattern_bottom.jpg">
+<img src="<?php echo $this->webroot; ?>img/testpattern_bottom.jpg">
 </center>
 <?php else: ?>
 <h1>Home</h1>
