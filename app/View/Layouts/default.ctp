@@ -41,14 +41,14 @@
               <li class="active"><a href="/games">Games</a></li>
               <li><a href="/leaderboard">Leaderboard</a></li>
                -->
-              <li><a href="/pages/about">About</a></li>
+              <li><a href="<?php echo $this->webroot; ?>pages/about">About</a></li>
 				<?php if ($this->Session->check('Auth.User')):?>
 				<li><a href="/users/">HAI <?php echo strtoupper($this->Session->read('Auth.User.name'));?>!</a></li>
 				<!-- 
 				<li><a href="/users/logout">Log Out</a></li>
 				 -->
 				<?php else: ?>
-				<li><a href="/users/login">Log In</a></li>
+				<li><a href="<?php echo $this->webroot; ?>users/login">Log In</a></li>
 				<?php endif; ?>
             </ul>
           </div><!--/.nav-collapse -->
