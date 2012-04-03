@@ -9,7 +9,8 @@ class AppController extends Controller {
 		'Html',
 		'Js',
 		'Session',
-	 	'AssetCompress.AssetCompress'
+	 	'AssetCompress.AssetCompress',
+		'Facebook.Facebook'
 	);
 	
     public $components = array(
@@ -17,7 +18,7 @@ class AppController extends Controller {
     	'RequestHandler',
         'Auth' 
 		 => array(
-            'loginRedirect' => '/mobile',
+            'loginRedirect' => '/',
 		    'loginAction' => array(
 				'controller' => 'users',
 				'action'     => 'login'
@@ -26,10 +27,12 @@ class AppController extends Controller {
     		'authError'=>'Please Login',
      		'authenticate' => array(
 				'Basic' => array(
-                	'fields' => array('username' => 'name'),
+                	'fields' => array('username' => 'email'),
             	),
-        	)
+        	),
+        	'authorize' => 'Controller'
         ), 
+        'Facebook.Connect' => array('model' => 'User')
     );
 
     /**

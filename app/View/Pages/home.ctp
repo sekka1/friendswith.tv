@@ -1,3 +1,6 @@
+<?php echo $this->Facebook->login(); ?>
+<?php echo $this->Facebook->logout(array('redirect' => 'users/logout')); ?>
+
 <?php if (!$sdpLoggedIn): ?>
 <center>
 <img src="<?php echo $this->webroot; ?>img/splash_logo.png">
