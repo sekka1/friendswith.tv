@@ -585,9 +585,10 @@ class SDPWeb {
 
 	// This script can be used to subscribe to updates for all devices.
 	// To subscribe to updates for a single device, call echo($device->subsribeScript());
-	function subscribeScript() {
+	function subscribeScript($json = false) {
 		$notificationChannel = null;
-        	$devicesJSON = json_encode($this->context());
+        $devices = $this->context();
+		$devicesJSON = json_encode($devices);
 
 		foreach ($this->devices() as $deviceId => $device) {
 			if ($device->isOn()) {
@@ -601,10 +602,24 @@ class SDPWeb {
 		if ($notificationChannel) {
 		    $longpollUrl = urlencode($notificationChannel->longpoll);
 		    $unsubscribeUrl = urlencode($notificationChannel->delete);
-
-			return "<script>\n\tlongpollUrl = '$longpollUrl';\n\tunsubscribeUrl = '$unsubscribeUrl';\n\tdevices = $devicesJSON;\n</script>";
+			
+			if ($json) {
+				return json_encode(array(
+					'longpollUrl'	=> $longpollUrl,
+					'unsubscribeUrl'=> $unsubscribeUrl,
+					'devices'		=> $devices
+				));
+			} else {
+				return "<script>\n\tlongpollUrl = '$longpollUrl';\n\tunsubscribeUrl = '$unsubscribeUrl';\n\tdevices = $devicesJSON;\n</script>";
+			}
 		} else {
-			return "<script>\n\tdevices = $devicesJSON;\n</script>";
+			if ($json) {
+				return json_encode(array(
+					'devices' => $devices
+				));
+			} else {
+				return "<script>\n\tdevices = $devicesJSON;\n</script>";
+			}
 		}
 	}
 
