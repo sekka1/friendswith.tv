@@ -1,4 +1,4 @@
-<!doctype html>
+<?php echo $this->Facebook->html(); ?>
 <html lang="en">
 <head>
 	<?php echo $this->Html->charset(); ?>
@@ -62,7 +62,8 @@
 			<?php echo $content_for_layout; ?>
 		</div>
     </div> <!-- /container -->
-	<?php 
+	<?php
+		echo $this->Facebook->init();  
 		if(env('REMOTE_ADDR')!='127.0.0.1') echo $this->element('js/owa');
 		echo $this->element('sql_dump'); 
 	?>

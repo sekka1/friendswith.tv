@@ -25,8 +25,12 @@
  * its action called 'display', and we pass a param to select the view file
  * to use (in this case, /app/View/Pages/home.ctp)...
  */
+	Router::mapResources('checkins');
+	Router::mapResources('recs');
 	Router::parseExtensions();
+
 	Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
+	Router::connect('/docs/*', array('controller' => 'pages', 'action' => 'display'));
 	Router::connect('/mobile', array('controller' => 'pages', 'action' => 'display', 'mobile'));
 	Router::connect('/dashboard', array('controller' => 'pages', 'action' => 'display', 'dashboard'));
 /**

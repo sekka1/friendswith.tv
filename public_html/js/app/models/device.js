@@ -1,4 +1,4 @@
-Device = Backbone.Model.extend({
+var Device = Backbone.Model.extend({
 	defaults: {
 		channel:null,
 		channel_id:null

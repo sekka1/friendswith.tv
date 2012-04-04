@@ -12,10 +12,14 @@ class DeviceController extends AppController {
 	
 	function context(){
 		//$this->_sdp_init();
+		//$devices = $this->sdp->devices();
 		$devices = $this->sdp->devices();
+		$this->log($devices,'devices');
+		
 		//debug($this->sdp);
 		//debug($devices);
-		$this->set('sdp',$this->sdp); 
+		//$this->log($devices,'devices');
+		//$this->set('sdp',$this->sdp); 
 		$this->set(compact('devices'));
 	}
 	
@@ -29,7 +33,15 @@ class DeviceController extends AppController {
 	
 	function action(){
 		$this->autoRender = false;
+		$this->log($_SERVER['REQUEST_URI'],'actions');
 		$this->sdp->perform_action();
+	}
+	
+	function channels($device_id){
+		//$this->autoRender = false;
+		//$channels = $this->sdp->getPlatformChannels(null, 200, 0);
+		//debug($channels);
+		
 	}
 }
 ?>
