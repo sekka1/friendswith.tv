@@ -1,35 +1,42 @@
-<?php 
+<?php
 class RecsController extends AppController {
-	
-	public $uses = array('Rec');
-	
-	function index(){
-		//$this->paginate['Rec']['order'] = array('created'=>-1);
-		$conditions = array('user_to_id'=>$this->Auth->user('id'));
-		$recs = $this->Rec->find('all',compact('conditions'));
-		$this->set(compact('recs'));
+	public $name = 'Recs';
+	function index() {
+		$limit = false;
+		//$order = 'Rec.id ASC';
+		//$conditions = array('Rec.client_id'=>991);
+		$recs = $this->Rec->find('all',compact('limit','order','conditions'));
+		$this->set('recs', $recs);
+		$this->set('_serialize', 'recs');
 	}
-
-	function create($show_id, $user_to_id, $time_code = null){
-		$this->autoRender = false;
-		$user_from_id = $this->Auth->user('id');
-		if($this->request->isPost()){
-			$this->Rec->create();
-			$rec = array();
-			$rec['show_id'] = $show_id;
-			$rec['user_from_id'] = $user_from_id;
-			$rec['user_to_id'] = $user_to_id;
-			$rec['time_code'] = $time_code;
-			if($this->Rec->save($rec)){
-				echo '1';
-			}else{
-				echo '0';
-			}
-		}
+	function view($id) {
+		$rec = $this->Rec->find('first', array(
+				'conditions' => array('Rec.id' => $id)
+		));
+		$this->set('rec', $rec);
+		$this->set('_serialize', 'rec');
 	}
-	
-	function view($id){
-		$this->autoRender = false;
+	function add() {
+		//$this->log($this->request->data);
+		$rec['Rec'] = $this->request->data;
+		$this->Rec->create();
+		$this->Rec->save($rec);
+		$rec['Rec']['id'] = $this->Rec->id;
+		$this->set('rec', $rec);
+		$this->set('_serialize', 'rec');
+	}
+	function edit($id) {
+		$rec['Rec'] = $this->request->data;
+		$rec['Rec']['id'] = $id;
+		$this->Rec->save($rec);
+		$this->set('rec', $rec);
+		$this->set('_serialize', 'rec');
+	}
+	function delete($id) {
+		$this->Rec->delete($id);
+		$result = array('result' => true);
+		$this->set('result', $result);
+		$this->set('_serialize', 'result');
 	}
 }
-?>
+

@@ -1,28 +1,41 @@
 <?php 
 class CheckinsController extends AppController {
-	
-	//public $uses = array('Rec');
-	
-	function index(){
-		$conditions = array('user_id'=>$this->Auth->user('id'));
-		$this->Checkin->find('all',compact('conditions'));
+	public $name = 'Checkins';
+	function index() {
+		$limit = false;
+		//$order = 'Checkin.id ASC';
+		//$conditions = array('Checkin.client_id'=>991);
+		$checkins = $this->Checkin->find('all',compact('limit','order','conditions'));
+		$this->set('checkins', $checkins);
+		$this->set('_serialize', 'checkins');
 	}
-	
-	function create($show_id, $time_code = null){
-		$this->autoRender = false;
-		$user_from_id = $this->Auth->user('id');
-		if($this->request->isPost()){
-			$this->Checkin->create();
-			$rec = array();
-			$rec['show_id'] = $show_id;
-			$rec['user_id'] = $user_from_id;
-			$rec['time_code'] = $time_code;
-			if($this->Checkin->save($rec)){
-				echo '1';
-			}else{
-				echo '0';
-			}
-		}
+	function view($id) {
+		$checkin = $this->Checkin->find('first', array(
+				'conditions' => array('Checkin.id' => $id)
+		));
+		$this->set('checkin', $checkin);
+		$this->set('_serialize', 'checkin');
+	}
+	function add() {
+		//$this->log($this->request->data);
+		$checkin['Checkin'] = $this->request->data;
+		$this->Checkin->create();
+		$this->Checkin->save($checkin);
+		$checkin['Checkin']['id'] = $this->Checkin->id;
+		$this->set('checkin', $checkin);
+		$this->set('_serialize', 'checkin');
+	}
+	function edit($id) {
+		$checkin['Checkin'] = $this->request->data;
+		$checkin['Checkin']['id'] = $id;
+		$this->Checkin->save($checkin);
+		$this->set('checkin', $checkin);
+		$this->set('_serialize', 'checkin');
+	}
+	function delete($id) {
+		$this->Checkin->delete($id);
+		$result = array('result' => true);
+		$this->set('result', $result);
+		$this->set('_serialize', 'result');
 	}
 }
-?>
