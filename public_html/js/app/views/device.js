@@ -1,9 +1,13 @@
 DeviceView = Backbone.View.extend({
+	template: $("#deviceTemplate").html(),
 	initialize: function(){
 		console.log("Alerts suck.");
 		this.render();
 	},
 	render: function(){
+		var tmpl = _.template(this.template);
+        this.$el.html(tmpl(this.model.toJSON()));
+        return this;
 		// Compile the template using underscore
 		//var template = _.template( $("#search_template").html(), {} );
 		// Load the compiled HTML into the Backbone "el"

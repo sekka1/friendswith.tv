@@ -1,4 +1,4 @@
 <?php
 class Checkin extends AppModel {
-	public $useTable = 'Check_ins';
+	//public $useTable = 'Check_ins';
 }

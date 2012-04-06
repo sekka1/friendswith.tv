@@ -2,7 +2,7 @@
 // app/Model/User.php
 App::uses('AuthComponent', 'Controller/Component');
 class User extends AppModel {
-	public $useTable = 'Users';
+	//public $useTable = 'users';
 
     public $name = 'User';
     public $validate = array(
