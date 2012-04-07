@@ -10,11 +10,12 @@
 		$rawOutput = Configure::read('debug');
 		echo $this->Html->meta('icon'),"\n\t";
 		echo $this->AssetCompress->css('all.css', $options=array('raw'=>$rawOutput)),"\n\t";
-		//echo $this->Html->css('http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css');
 		echo $this->AssetCompress->includeCss();
+		echo $this->fetch('css');
 		echo $this->AssetCompress->script('libs.js', $options=array('raw'=>$rawOutput)),"\n\t";
 		echo $this->AssetCompress->includeJs(),"\n\t"; 
-		echo $scripts_for_layout,"\n\t";
+		echo $this->fetch('meta');
+		echo $this->fetch('script');
 		echo $this->Js->writeBuffer(),"\n\t"; // Any Buffered Scripts
 	?>
 	<style>
@@ -37,10 +38,6 @@
           <a class="brand" href="/">FriendsWithTV</a>
           <div class="nav-collapse">
             <ul class="nav">
-            	<!-- 
-              <li class="active"><a href="/games">Games</a></li>
-              <li><a href="/leaderboard">Leaderboard</a></li>
-               -->
               <li><a href="<?php echo $this->webroot; ?>pages/about">About</a></li>
 				<?php if ($this->Session->check('Auth.User')):?>
 				<li><a href="/users/">HAI <?php echo strtoupper($this->Session->read('Auth.User.name'));?>!</a></li>
@@ -59,7 +56,7 @@
     <div class="container">
 		<div id="content">
 			<?php echo $this->Session->flash(); ?>
-			<?php echo $content_for_layout; ?>
+			<?php echo $this->fetch('content'); ?>
 		</div>
     </div> <!-- /container -->
 	<?php
