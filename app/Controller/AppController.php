@@ -18,13 +18,6 @@ class AppController extends Controller {
     	'RequestHandler',
         'Auth' 
 		 => array(
-            'loginRedirect' => '/',
-		    'loginAction' => array(
-				'controller' => 'users',
-				'action'     => 'login'
-			),
-            'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home'),
-    		'authError'=>'Please Login',
      		'authenticate' => array(
 				'Basic' => array(
                 	'fields' => array('username' => 'email'),
@@ -124,6 +117,25 @@ class AppController extends Controller {
 		$this->set(compact('sdp'));
 	}
 	
+	function beforeFacebookSave(){
+		$this->log('afterFacebookLogin','facebook');
+			$this->Connect->authUser['User']['email'] = $this->Connect->user('email');
+			return true; //Must return true or will not save.
+		}
+	function isAuthorized() {
+		return true;
+	}
 	
+function beforeFacebookLogin($user){
+	$this->log('afterFacebookLogin','facebook');
+	$this->log($user,'facebook');
+    //Logic to happen before a facebook login
+}
+
+function afterFacebookLogin(){
+	$this->log('afterFacebookLogin','facebook');
+    //Logic to happen after successful facebook login.
+    $this->redirect('/pages/home');
+}
 }
 ?>

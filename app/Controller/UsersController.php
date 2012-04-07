@@ -20,12 +20,6 @@ class UsersController extends AppController {
 		}
 	}
 	
-	function beforeFacebookSave(){
-			$this->Connect->authUser['User']['email'] = $this->Connect->user('email');
-			return true; //Must return true or will not save.
-		}
-	
-	
 	public function logout() {
 	    $this->redirect($this->Auth->logout());
 	}
