@@ -14,8 +14,15 @@
 		echo $this->AssetCompress->includeCss();
 		echo $this->AssetCompress->script('libs.js', $options=array('raw'=>$rawOutput)),"\n\t";
 		echo $this->AssetCompress->includeJs(),"\n\t"; 
+		echo($sdp->subscribeScript());
 		echo $scripts_for_layout,"\n\t";
 		echo $this->Js->writeBuffer(),"\n\t"; // Any Buffered Scripts
+		$this->Html->scriptStart(array('inline' => true));
+	?>
+	window.onload = (function(){  incrementPosition(); longpoll(); });
+	window.onunload = (function(){ unsubscribe(); });
+	<?php 
+		echo $this->Html->scriptEnd(); 
 	?>
 	<style>
       body {
@@ -63,6 +70,7 @@
 		</div>
     </div> <!-- /container -->
 	<?php
+		echo $this->element('templates/device');
 		echo $this->Facebook->init();  
 		if(env('REMOTE_ADDR')!='127.0.0.1') echo $this->element('js/owa');
 		echo $this->element('sql_dump'); 
