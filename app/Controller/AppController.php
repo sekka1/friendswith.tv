@@ -16,16 +16,21 @@ class AppController extends Controller {
     public $components = array(
         'Session',
     	'RequestHandler',
-        'Auth' 
-		 => array(
+        'Auth' => array(
      		'authenticate' => array(
 				'Basic' => array(
-                	'fields' => array('username' => 'email'),
+					'fields' => array('username' => 'email','password'=>'password'),
             	),
         	),
         	'authorize' => 'Controller'
         ), 
-        'Facebook.Connect' => array('model' => 'User')
+        'Facebook.Connect' => array(
+			'model' => 'User',
+			'modelFields' => array(
+				'username' => 'email',
+				'password'=>'password'
+			),
+		)
     );
 
     /**
@@ -37,20 +42,7 @@ class AppController extends Controller {
 		/*
 		if (isset($this->params['admin']) || $this->name == 'Admin') {
 			//die('hAI');
-			$this->Auth->authenticate = array(
-				'Basic'=> array(
-					'userModel' => 'User',
-					'fields' => array('username' => 'name'),
-				)
-			);
-
 		}else{
-			$this->Auth->authenticate = array(
-				'Form'=> array(
-					'userModel' => 'User',
-					'fields' => array('username' => 'name'),
-				)
-			);
 		}
 		*/
         $this->Auth->allow('display');
