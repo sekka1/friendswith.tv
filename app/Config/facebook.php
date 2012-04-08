@@ -7,7 +7,7 @@
   	'Facebook' => array(
   		'appId' => FB_API_ID,
   		'apiKey' => FB_API_KEY,
-  		'secret' => 'YOUR_SECRET',
+  		'secret' => FB_API_KEY,
   		'cookie' => true,
   		'locale' => 'en_US',
   		)

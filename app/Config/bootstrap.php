@@ -64,3 +64,4 @@ Cache::config('default', array('engine' => 'File'));
  *
  */
 CakePlugin::loadAll(); // Loads all plugins at once
+config('facebook');
