@@ -21,7 +21,10 @@
 			define('SDP_API_KEY','6c61bd3dd2aec6f1');
 			break;	
 		case 'friendswith.tv':
-		default:
+		case 'www.friendswith.tv':
+			default:
+			define('FB_API_ID','329575197105604');
+			define('FB_API_KEY','961faf874fcda19d27b862e9a66e8287');
 			define('SDP_API_ID','e29409e7b76b58038d823df451878346');
 			define('SDP_API_KEY','373f246dc3035dfe');
 			break;
