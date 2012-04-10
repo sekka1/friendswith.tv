@@ -18,7 +18,7 @@
 			<h2>A completely integrated social TV experience</h2>
 		</hgroup>
 		<p>
-			FriendsWith.TV is the winner of the Codefor.tv Hackathon sponsored by NDS and Citizen Space. FriendsWith.TV was created by a group of individuals who want to create a better set of tools for watching TV with your friends.
+			FriendsWith.TV is the winner of the Codefor.tv Hackathon sponsored by NDS and Citizen Space. FriendsWith.TV was created by a group of individuals who want to create a better experience for watching and sharing TV with your friends.
 		</p>
 	</header>
 	<ul>
