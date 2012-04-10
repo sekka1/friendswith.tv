@@ -47,5 +47,6 @@
 			<small>&copy; 2012 Friendswith.TV. All Rights Reserved</small>
 		</div>
 	</footer>
+	<?php 		if(env('REMOTE_ADDR')!='127.0.0.1') echo $this->element('js/ga'); ?>
 </body>
 </html>

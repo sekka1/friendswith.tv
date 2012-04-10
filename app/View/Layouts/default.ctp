@@ -69,7 +69,7 @@
 	<?php
 		echo $this->element('templates/device');
 		echo $this->Facebook->init();  
-		if(env('REMOTE_ADDR')!='127.0.0.1') echo $this->element('js/owa');
+		if(env('REMOTE_ADDR')!='127.0.0.1') echo $this->element('js/ga');
 		echo $this->element('sql_dump'); 
 	?>
 </body>
