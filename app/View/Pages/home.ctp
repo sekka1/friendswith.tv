@@ -16,6 +16,10 @@
 					<td><input id="add-contentId" size="32"/></td>
 				</tr>
 				<tr>
+					<th>ScheduleId</th>
+					<td><input id="add-scheduleId" size="32"/></td>
+				</tr>
+				<tr>
 					<th>UserId</th>
 					<td><input id="add-userId" size="32" value="<?php echo AuthComponent::user('id');?>" /></td>
 				</tr>

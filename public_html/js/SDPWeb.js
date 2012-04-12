@@ -173,6 +173,7 @@ function didLongpoll() {
 				if (newContext['contentId'] && device['contentId'] != newContext['contentId']) {
 	                if (window.contentDidChange) {
 	                    contentDidChange(deviceId, device['contentId'], newContext['contentId'], newContext['contentTitle'], newContext['seriesTitle'], newContext['contentImage']);
+	                    newContentDidChange(newContext);
 	                }
 	                device['contentId'] = newContext['contentId'];
 	            }
@@ -292,8 +293,18 @@ function contentDidChange(deviceId, oldChannel, newChannel, contentTitle, series
 
 	// replace the content title
 	if (seriesTitle && seriesTitle != contentTitle) contentTitle += '<br>'+seriesTitle;
-	document.getElementById('contentTitle-'+deviceId).innerHTML = contentTitle;	
+	document.getElementById('contentTitle-'+deviceId).innerHTML = contentTitle;
+	
+	$('#add-contentId').val();
 }
+
+function newContentDidChange(context) {
+	console.log('newContentDidChange');
+	console.log(context);
+	$('#add-contentId').val(context['contentId']);
+	$('#add-scheduleId').val(context['scheduleId']);
+}
+
 
 function positionDidChange(deviceId, oldPosition, newPosition) {
 	console.log('positionDidChange('+deviceId+','+oldPosition+','+newPosition+')');
