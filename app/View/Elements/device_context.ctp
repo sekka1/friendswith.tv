@@ -1,12 +1,4 @@
 <?php 
-//require_once 'shared.php';
-$this->Html->scriptStart(array('inline' => false));
-?>
-window.onload = (function(){  incrementPosition(); longpoll(); });
-window.onunload = (function(){ unsubscribe(); });
-<?php 
-$this->Html->scriptEnd(); 
-echo($sdp->subscribeScript());
 
 function controlButton($link, $image, $id) {
 	return "<td align=\"center\">" . javascriptLink($link, "<img id=\"$id\" src=\"/img/$image.png\" width=\"30\" height=\"30\">") . "</td>";

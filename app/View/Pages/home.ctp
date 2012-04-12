@@ -5,7 +5,9 @@
 	
 	$devices = $sdp->devices(); 
 	if($devices){
+		echo $this->element('device_context');
 ?>
+	
 		<h1>Add a checkin</h1>
 		<table id="add-table">
 			<tbody>
