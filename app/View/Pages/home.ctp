@@ -1,52 +1,106 @@
-<?php $this->layout = false; ?>
-<html lang="en">
-<head>
-	<title>FriendsWith.TV | Social TV</title>
-	<?php 
-		echo $this->Html->meta('icon'),"\n\t";
-		echo $this->AssetCompress->css('splash_page.css'),"\n\t";
-		echo $this->fetch('css');
-	?>
-	<!--[if lt IE 9]>
-	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
-</head>
-<body>
-	<header>
-		<hgroup>
-			<h1>FriendsWith.TV</h1>
-			<h2>A completely integrated social TV experience</h2>
-		</hgroup>
-		<p>
-			FriendsWith.TV is the winner of the Codefor.tv Hackathon sponsored by NDS and Citizen Space. FriendsWith.TV was created by a group of individuals who want to create a better experience for watching and sharing TV with your friends.
-		</p>
-	</header>
-	<ul>
-		<li class="share">
-			<h3>Share your favorite movies, shows &amp; clips</h3>
-			<p>Share TV shows and Scenes with friends. Shared content can be retrieved instantly on compatible set top boxes.</p>
-		</li>
-		<li class="control">
-			<h3>Control TV from your tablet or smartphone</h3>
-			<p>No need for the thousand button remote, with realtime TV controls, including pause, fast forward, rewind and more.</p>
-		</li>
-		<li class="sync">
-			<h3>Realtime TV synching</h3>
-			<p>Synchronizes your Handheld device with your cable set top box so you can receive real-time information and updates about what you are watching.</p>
-		</li>
-		<li class="connect">
-			<h3>Connect with global fan communities</h3>
-			<p>View status updates from your friends and the global TV audience about what you are watching.</p>
-		</li>	
-	</ul>
-	<footer>
-		<div>
-			<img src="img/friends_with_tv_logo_splash.png" />
-			<h4>Coming Soon to your TV</h4>
-			<p>Media inquiries contact <a href="mailto:media@friendswith.tv">media@friendswith.tv</a></p>
-			<small>&copy; 2012 Friendswith.TV. All Rights Reserved</small>
-		</div>
-	</footer>
-	<?php 		if(env('REMOTE_ADDR')!='127.0.0.1') echo $this->element('js/ga'); ?>
-</body>
-</html>
+<?php 
+	if(!$this->Session->check('Auth.User')){
+		$this->layout = 'splash';
+	}
+	
+	$devices = $sdp->devices(); 
+	if($devices){
+?>
+		<h1>Add a checkin</h1>
+		<table id="add-table">
+			<tbody>
+				<tr>
+					<th>ContentId</th>
+					<td><input id="add-contentId" size="32"/></td>
+				</tr>
+				<tr>
+					<th>UserId</th>
+					<td><input id="add-userId" size="32" value="<?php echo AuthComponent::user('id');?>" /></td>
+				</tr>
+			</tbody>
+		</table>
+		<input id="add-checkin" type="button" value="Checkin"/>
+		<input id="add-rec" type="button" value="Send To a Friend"/>
+
+<?php 		
+		//debug($devices);
+	}else{
+		$this->element('splash');
+	}
+?>
+<script>
+$(function() {
+	$("#add-checkin").click(function(e) {
+		var checkin = new Checkin({
+			user_id : $('#add-userId').val(),
+			content_id : $('#add-contentId').val()
+		});
+		checkin.save();
+	});
+
+	$("#add-rec").click(function(e) {
+		var rec = new Rec({
+			user_id : $('#add-userId').val(),
+			content_id : $('#add-contentId').val()
+		});
+		rec.save();
+	});
+
+	
+	$('#list-button').click(function(e){
+		var customers = new Customers;
+		customers.fetch({
+			success : function(customers, response) {
+				var tr = $('#list-table>tbody>tr');
+				if(tr.length > 0) {
+					tr.remove();
+				}
+				var tbody = $('#list-table>tbody');
+				var i;
+				for(i = 0; i < customers.length; ++i) {
+					var customer = customers.at(i);
+					tbody.append('<tr><td>' + customer.get('id') + 
+							'</td><td>' + customer.get('name') +
+							'</td><td>' + customer.get('address') +
+							'</td></tr>');
+				}
+			},
+			error : function(customers, response) {
+				alert('error: ' + response);
+			}
+		});
+	});
+	
+	$('#update-read_button').click(function(e){
+		var customer = new Customer({
+			id : $('#update-read_id').val()
+		});
+		customer.fetch({
+			success : function(customer, response) {
+				$('#update-name').val(customer.get('name'));
+				$('#update-address').val(customer.get('address'));
+			},
+			error : function(customers, response) {
+				alert('error: ' + response);
+			}
+		});
+	});
+	
+	$('#update-update_button').click(function(e){
+		var customer = new Customer({
+			id : $('#update-read_id').val(),
+			name : $('#update-name').val(),
+			address : $('#update-address').val()
+		});
+		customer.save();
+	});
+	
+	$('#delete-button').click(function(e){
+		var customer = new Customer({
+			id : $('#delete-id').val()
+		});
+		customer.destroy();
+	});
+});
+
+</script>
