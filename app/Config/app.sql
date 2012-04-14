@@ -4,26 +4,13 @@
 -- ------------------------------------------------------
 -- Server version	5.0.45
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Table structure for table `Check_ins`
---
-
 DROP TABLE IF EXISTS `checkins`;
 CREATE TABLE `checkins` (
   `id` int(11) NOT NULL auto_increment,
   `user_id` int(11) default NULL,
-  `show_id` varchar(256) default NULL,
+  `content_id` varchar(256) default NULL,
+  `schedule_id` varchar(256) default NULL,
+  `watched_start` int(11) default NULL,
   `watched_duration` int(11) default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -58,7 +45,7 @@ CREATE TABLE `recs` (
   `user_from_id` int(11) default NULL,
   `user_to_id` int(11) default NULL,
   `time_code` int(11) default NULL,
-  `show_id` varchar(256) default NULL,
+  `content_id` varchar(256) default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -71,6 +58,7 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL auto_increment,
   `password` varchar(256) default NULL,
   `email` varchar(256) default NULL,
+  `facebook_id` bigint(20) unsigned NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 

@@ -20,8 +20,13 @@ class AppController extends Controller {
      		'authenticate' => array(
 				'Basic' => array(
 					'fields' => array('username' => 'email','password'=>'password'),
+		            	'loginRedirect'=>'/pages/home',
+		        	'logoutRedirect'=>'/pages/home',
+		    
             	),
         	),
+        	'loginRedirect'=>'/pages/home',
+        	'logoutRedirect'=>'/pages/home',
         	'authorize' => 'Controller'
         ), 
         'Facebook.Connect' => array(
