@@ -1,0 +1,57 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1038\cocoasubrtf360
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red170\green13\blue145;\red28\green0\blue207;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww13220\viewh17580\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\f0\b\fs32 \cf0 SDPWebFramework\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\b0\fs24 \cf0 \
+The SDPWebFramework is a library written in PHP and JavaScript that lets you write dynamic web apps that connect to the Service Delivery Platform. \
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\b\fs32 \cf0 Installing\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\b0\fs24 \cf0 \
+This application requires a web server with PHP enabled. If you are running Apache and PHP is not enabled, uncomment the line containing \'93PHP\'94 in your httpd.conf configuration file. Then restart the web server.\
+\
+Copy the SDPWebFramework folder to your web server documents folder, or make a symbolic link:\
+\
+	
+\f1 \CocoaLigature0 cd /Library/WebServer/Documents\
+
+\f0 \CocoaLigature1 	
+\f1 \CocoaLigature0 ln -s ~/Downloads/sdp-web-php/SDPWebFramework SDPWebFramework
+\f0 \CocoaLigature1 \
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\b\fs32 \cf0 API Key\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\b0\fs24 \cf0 \
+Each application uses a unique API key to connect to the Service Delivery Platform. To run an application, you'll need to get an API key from the SDP developer portal:\
+\
+	{\field{\*\fldinst{HYPERLINK "http://developer.sdp.nds.com"}}{\fldrslt http://developer.sdp.nds.com}}\
+\
+Create a new application. When prompted for an application URL, enter a link like the following, substituting the path to the application on your web server. This allows control to return to the application during the authentication process.\
+\
+	http://localhost/websdp/index.php\
+\
+In your PHP application, you can create an SDPWeb object and set the API key using the following code:\
+\
+	
+\f1 \cf2 \CocoaLigature0 require_once\cf0 (\cf3 'SDPWebFramework/SDPWeb.php'\cf0 );
+\f0 \CocoaLigature1 \
+	
+\f1 \CocoaLigature0 $sdp = \cf2 new\cf0  SDPWeb($server);\
+
+\f0 \CocoaLigature1 	
+\f1 \CocoaLigature0 $sdp->apiKey = \cf3 'a1b00c1e9f5117b1ecab123cf2946d37'\cf0 ;\
+
+\f0 \CocoaLigature1 \
+\
+}

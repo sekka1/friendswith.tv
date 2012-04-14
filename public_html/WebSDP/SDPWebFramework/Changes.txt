@@ -1,0 +1,16 @@
+1.1.2
+=====
+Updated notification format.
+
+1.1.1
+=====
+Added high-level SDPDevice class, which stores the state of a device.
+The long polling code has been rewritten. See the WebZapper and Stopwatch apps for examples, and see the step-by-step guide.
+
+1.1
+===
+Added support for API v1.1.
+
+1.0
+===
+Initial release.

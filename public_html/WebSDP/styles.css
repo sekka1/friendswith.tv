@@ -1,0 +1,41 @@
+body { 
+	background-image: url('images/background.jpg'); 
+	background-repeat: repeat-x; 	
+	background-attachment: fixed;
+	background-color: #444;
+	font: 14px/1.4em Helvetica; color: #FFF; 
+	margin: 0px 0px; 
+} 
+
+body.clear {
+	background-image: none;
+	background-color: rgba(255, 255, 255, 0.0); ;
+}
+
+p, li, td { font: 14px/1.4em Helvetica; color: #FFF; } 
+a { font: 14px/1.4em Helvetica; color: #FFF; text-decoration: none;} 
+td.series { font: 28px/1.4em Helvetica; color: #FFF; } 
+td.synopsis { font: 14px/1.4em Helvetica; color: rgba(255, 255, 255, 0.5); } 
+
+div.headline { font: 32px/1.4em Helvetica; color: #FFF; font-weight: bold; } 
+div.section { font: 24px/1.4em Helvetica; color: #FFF; font-weight: bold; } 
+div.item { font: 20px/1.4em Helvetica; color: #FFF; font-weight: bold; } 
+
+tr.alternating:nth-child(odd)   { background-color:rgba(255, 255, 255, 0.05);  }
+tr.header   { background-color:rgba(255, 255, 255, 0.05);  }
+tr.selected { background-color: rgba(255, 255, 255, 0.3); };
+
+td.tabs { background-color: rgba(255, 255, 255, 0.05); }
+td.selected { background-color: rgba(255, 255, 255, 0.3); }
+td.nopadding { padding: 0px 0px; }
+
+table.schedule { margin: 20px; display: inline; }
+td.schedule {
+	font: 18px/1.4em Helvetica; 
+	color: white; font-weight: bold; 
+	background-color: rgba(0, 0, 0, 0.5); 
+}	
+td.timecode {
+	font: 18px/1.4em Helvetica; 
+	color: white; font-weight: bold; 
+}

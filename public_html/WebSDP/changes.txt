@@ -1,0 +1,20 @@
+1.1
+===
+
+Updated for SDP v1.1.
+Refactored shared code into SDPWebFramework.
+Added JavaScript callbacks to receive notifications.
+Added Schedule tab with a grid of schedule 
+Added playback control buttons to Context tab.
+
+1.0.1
+=====
+
+Split index.php into separate pages.
+Added paging to channels page.
+Added long polling to context page.
+
+1.0
+===
+
+Initial release.
