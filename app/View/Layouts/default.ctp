@@ -1,5 +1,4 @@
 <?php echo $this->Facebook->html(); ?>
-<html lang="en">
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
@@ -14,7 +13,7 @@
 		echo $this->fetch('css');
 		echo $this->AssetCompress->script('libs.js', $options=array('raw'=>$rawOutput)),"\n\t";
 		echo $this->AssetCompress->includeJs(),"\n\t"; 
-		echo($sdp->subscribeScript());
+		if(!emptY($sdpLoggedIn) and !empty($sdp))echo($sdp->subscribeScript());
 		echo $this->fetch('meta');
 		echo $this->fetch('script');
 		echo $this->Js->writeBuffer(),"\n\t"; // Any Buffered Scripts

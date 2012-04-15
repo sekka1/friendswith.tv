@@ -31,7 +31,7 @@
 <?php 		
 		//debug($devices);
 	}else{
-		$this->element('splash');
+		echo $this->element('splash');
 	}
 ?>
 <script>
