@@ -36,29 +36,43 @@ CREATE TABLE `friends` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Table structure for table `Rec`
+-- Table structure for table `Shares`
 --
 
 DROP TABLE IF EXISTS `recs`;
-CREATE TABLE `recs` (
+DROP TABLE IF EXISTS `shares`;
+CREATE TABLE `shares` (
   `id` int(11) NOT NULL auto_increment,
+   `content_title` varchar(256) default NULL,
+   `content_image` varchar(256) default NULL,
+  `content_id` varchar(256) default NULL,
+  `schedule_id` varchar(256) default NULL,
   `user_from_id` int(11) default NULL,
   `user_to_id` int(11) default NULL,
   `time_code` int(11) default NULL,
-  `content_id` varchar(256) default NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Table structure for table `Users`
 --
-
 DROP TABLE IF EXISTS `users`;
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL auto_increment,
-  `password` varchar(256) default NULL,
-  `email` varchar(256) default NULL,
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(256) NOT NULL,
+  `password` varchar(256) DEFAULT NULL,
+  `email` varchar(256) DEFAULT NULL,
   `facebook_id` bigint(20) unsigned NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `password`, `email`, `facebook_id`) VALUES
+(2, 'Garland Kan', '90ba7d9339fc5d3eec76fd3a5dddb7e38bf24828', 'garlandk@gmail.com', 566708666),
+(3, 'Bruno Tavares', '0b8b1a5e2994bb6d28ed852e2d9d77421e67034b', 'bruno@tavares.me', 1199220695),
+(7, 'Joel Brass', '0b8b1a5e2994bb6d28ed852e2d9d77421e67034b', 'joel@jbrass.com', 589883853);
+
 
