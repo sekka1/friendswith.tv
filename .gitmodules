@@ -1,0 +1,3 @@
+[submodule "public_html/app"]
+	path = public_html/app
+	url = git@github.com:sekka1/fwt-mobile.git
