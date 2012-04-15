@@ -27,7 +27,7 @@
  */
 	Router::mapResources('checkins');
 	Router::mapResources('shares');
-	Router::parseExtensions();
+	Router::parseExtensions('json','xml');
 
 	Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
 	Router::connect('/docs/*', array('controller' => 'pages', 'action' => 'display'));

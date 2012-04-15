@@ -26,7 +26,7 @@
 			</tbody>
 		</table>
 		<input id="add-checkin" type="button" value="Checkin"/>
-		<input id="add-rec" type="button" value="Send To a Friend"/>
+		<input id="add-share" type="button" value="Share"/>
 
 <?php 		
 		//debug($devices);
@@ -44,12 +44,12 @@ $(function() {
 		checkin.save();
 	});
 
-	$("#add-rec").click(function(e) {
-		var rec = new Rec({
+	$("#add-share").click(function(e) {
+		var share = new Share({
 			user_id : $('#add-userId').val(),
 			content_id : $('#add-contentId').val()
 		});
-		rec.save();
+		share.save();
 	});
 
 	
