@@ -26,7 +26,7 @@
  * to use (in this case, /app/View/Pages/home.ctp)...
  */
 	Router::mapResources('checkins');
-	Router::mapResources('recs');
+	Router::mapResources('shares');
 	Router::parseExtensions();
 
 	Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
