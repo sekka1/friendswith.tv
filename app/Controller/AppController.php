@@ -104,9 +104,7 @@ class AppController extends Controller {
    	
 	
 	function _sdp_init(){
-		$sdp = new SDPWeb();
-		$sdp->apiKey = SDP_API_ID; //fwt local
-		$sdp->apiSecret = SDP_API_KEY;
+		$sdp = new SDPWeb(null, SDP_API_ID, SDP_API_KEY);
 		$sdp->perform_auth_action();
 		$this->sdpLoggedIn = $sdp->loggedIn();
 		$this->set('sdpLoggedIn',$this->sdpLoggedIn);

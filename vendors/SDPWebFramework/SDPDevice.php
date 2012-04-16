@@ -29,21 +29,20 @@ class SDPDevice {
 	// to get an array of SDPDevice objects, call $sdp->devices().
 	public function __construct($sdp, $deviceNode) { 
 		$this->sdp = $sdp;
-		
-		$this->deviceId = $deviceNode['id'];
-		$this->name = $deviceNode->name;
+		$this->deviceId = (string) $deviceNode['id'];
+		$this->name = (string) $deviceNode->name;
 		
 		if (isset($deviceNode->presence)) {
-			$this->status = $deviceNode->presence->status;
+			$this->status = (string) $deviceNode->presence->status;
 		}
 		
 		if (isset($deviceNode->time)) {
-			$this->time = $deviceNode->time->now;
-			$this->timezone = $deviceNode->time->zone;
+			$this->time = (string) $deviceNode->time->now;
+			$this->timezone = (string) $deviceNode->time->zone;
 		}
 
 		if (isset($deviceNode->capabilities) && isset($deviceNode->capabilities->profile)) {
-			$this->profile = $deviceNode->capabilities->profile->name;
+			$this->profile = (string) $deviceNode->capabilities->profile->name;
 		}
 	}
 	

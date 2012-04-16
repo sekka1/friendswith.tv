@@ -19,7 +19,7 @@ class SDPWeb {
 
 	private $devices;
 
-    public function __construct($appInterfaceURL = null) {
+    public function __construct($appInterfaceURL = null, $apiKey = null, $apiSecret = null) {
         $this->web = new WebRequest();
         if ($appInterfaceURL) {
             $this->appInterfaceURL = $appInterfaceURL;
@@ -35,11 +35,11 @@ class SDPWeb {
             else
                 $this->serverRootURL = $this->appInterfaceURL;
         }
-
-        $this->access_token(); // get the access token from the cookies
+        
         $this->householdId = null;
-        $this->apiKey = '';
-        $this->apiSecret = '';
+        $this->apiKey = $apiKey;
+        $this->apiSecret = $apiSecret;
+		$this->access_token(); // get the access token from the cookies
     }
 
     // Send the user to this URL so that they can log in.
@@ -70,8 +70,8 @@ class SDPWeb {
     // and get a new access token. You can also call it yourself at any time.
     public function reauthorize() {
         $refresh_token = $_COOKIE['refresh_token'];
-        $auth_url = "{$this->serverRootURL}/oauth/access_token?grant_type=refresh_token&refresh_token=$refresh_token&client_id=$this->apiKey&client_secret=$this->apiSecret";
-        $request = new WebRequest();
+		$auth_url = "{$this->serverRootURL}/oauth/access_token?grant_type=refresh_token&refresh_token=$refresh_token&client_id=$this->apiKey&client_secret=$this->apiSecret";
+		$request = new WebRequest();
         try {
             $json = $request->httpGet($auth_url);
             if ($json)
@@ -98,10 +98,10 @@ class SDPWeb {
 
     private function access_token() {
         if (!isset($this->access_token)) {
-            if (isset($_COOKIE['access_token'])) {
+            if (isset($_COOKIE['access_token']) && !empty($_COOKIE['access_token'])) {
                 $this->access_token = $_COOKIE['access_token'];
             } else if (isset($_COOKIE['refresh_token'])) {
-                $this->reauthorize();
+				$this->reauthorize();
             }
         }
 
@@ -190,7 +190,7 @@ class SDPWeb {
 
                 if ($headers)
                     $this->web->setRequestHeader($headers);
-
+				
                 try {
                     $notification = $this->longpoll($url);
 
@@ -587,9 +587,11 @@ class SDPWeb {
 	// To subscribe to updates for a single device, call echo($device->subsribeScript());
 	function subscribeScript($json = false) {
 		$notificationChannel = null;
-        $devices = $this->context();
-		$devicesJSON = json_encode($devices);
-
+        $longpollUrl = null;
+		$unsubscribeUrl = null;
+		$contexts = $this->context();
+		$devicesJSON = json_encode($contexts);
+		
 		foreach ($this->devices() as $deviceId => $device) {
 			if ($device->isOn()) {
 				$subscribe = $this->subscribeInstant("/devices/{$device->deviceId}/control/playout", 201);
@@ -603,24 +605,18 @@ class SDPWeb {
 		    $longpollUrl = urlencode($notificationChannel->longpoll);
 		    $unsubscribeUrl = urlencode($notificationChannel->delete);
 			
-			if ($json) {
-				return json_encode(array(
-					'longpollUrl'	=> $longpollUrl,
-					'unsubscribeUrl'=> $unsubscribeUrl,
-					'devices'		=> $devices
-				));
-			} else {
+			if (!$json) {
 				return "<script>\n\tlongpollUrl = '$longpollUrl';\n\tunsubscribeUrl = '$unsubscribeUrl';\n\tdevices = $devicesJSON;\n</script>";
 			}
-		} else {
-			if ($json) {
-				return json_encode(array(
-					'devices' => $devices
-				));
-			} else {
-				return "<script>\n\tdevices = $devicesJSON;\n</script>";
-			}
+		} else if (!$json) {
+			return "<script>\n\tdevices = $devicesJSON;\n</script>";
 		}
+		
+		return array(
+			'longpoll_url'		=> $longpollUrl,
+			'unsubscribe_url'	=> $unsubscribeUrl,
+			'devices'			=> $this->devices()
+		);
 	}
 
     public function subscribe($endpoint, $postXML, $code) {
