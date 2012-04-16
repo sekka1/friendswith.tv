@@ -307,7 +307,7 @@ function newContentDidChange(context) {
 
 
 function positionDidChange(deviceId, oldPosition, newPosition) {
-	console.log('positionDidChange('+deviceId+','+oldPosition+','+newPosition+')');
+	//console.log('positionDidChange('+deviceId+','+oldPosition+','+newPosition+')');
 
 	// update the position
     var positionSpan = document.getElementById('position-'+deviceId);

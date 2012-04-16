@@ -13,6 +13,7 @@ foreach ($sdp->devices() as $deviceId => $device) {
 
 	if ($device->isOn()) {
 		$contentId = $context['contentId'];
+		$scheduleId = $context['scheduleId'];
 		$contentTitle = $context['contentTitle'];
 		$seriesTitle = isset($context['seriesTitle']) ? $context['seriesTitle'] : null;
 		if ($seriesTitle && $seriesTitle != $contentTitle) $contentTitle = $seriesTitle . "<br>" . $contentTitle;
@@ -50,3 +51,9 @@ foreach ($sdp->devices() as $deviceId => $device) {
 	
 }
 ?>
+<script>
+$(function(){
+	$('#add-contentId').val('<?php echo $contentId; ?>');
+	$('#add-scheduleId').val('<?php echo $scheduleId; ?>');
+});
+</script>
