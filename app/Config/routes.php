@@ -31,7 +31,7 @@
 
 	Router::connect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
 	Router::connect('/docs/*', array('controller' => 'pages', 'action' => 'display'));
-	Router::connect('/mobile', array('controller' => 'pages', 'action' => 'display', 'mobile'));
+	Router::connect('/sdp_login', array('controller' => 'pages', 'action' => 'display', 'sdp_login'));
 	Router::connect('/dashboard', array('controller' => 'pages', 'action' => 'display', 'dashboard'));
 /**
  * ...and connect the rest of 'Pages' controller's urls.
