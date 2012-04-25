@@ -37,5 +37,27 @@ class PlatformController extends AppController {
 		
 		
 	}
+	
+	function channels()
+	{
+		
+	}
+	
+	function services($zip_code=null){
+		$services = false;
+		if($zip_code){
+			App::uses('Rovi','Lib');
+			$rovi = new Rovi();
+			$services = $rovi->services($zip_code);
+			$services = json_decode($services,true);
+			$services = $services['ServicesResult']['Services']['Service'];
+		}
+		$this->set(compact('services'));
+	}
+	
+	function set_service($mso_id,$service_id){
+		$this->Session->set('mso_id',$mso_id);
+		$this->Session->set('service_id',$service_id);
+	}
 }
 ?>

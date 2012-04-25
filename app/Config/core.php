@@ -339,5 +339,12 @@ Cache::config('content', array(
 	'prefix' => 'content_',	
     //'path' => CACHE . 'long' . DS,
 ));
+Cache::config('services', array(
+    'engine' => 'File',
+    'duration' => '+1 week',
+    'probability' => 100,
+	'prefix' => 'services_',	
+    //'path' => CACHE . 'long' . DS,
+));
 
 require_once 'fwt.php';
