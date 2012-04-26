@@ -1,6 +1,8 @@
 /app/Config/database.php
 #/app/tmp
 /lib/Cake/Console/Templates/skel/tmp/
+/public_html/js/c/*.js
+/public_html/css/c/*.css
 .DS_Store
 tags
 .sass-cache

@@ -19,8 +19,11 @@
 		echo $this->Js->writeBuffer(),"\n\t"; // Any Buffered Scripts
 		$this->Html->scriptStart(array('inline' => true));
 	?>
-	window.onload = (function(){  incrementPosition(); longpoll(); });
-	window.onunload = (function(){ unsubscribe(); });
+	window.onload = (function(){  
+		incrementPosition(); 
+		//longpoll(); 
+	});
+	//window.onunload = (function(){ unsubscribe(); });
 	<?php 
 		echo $this->Html->scriptEnd(); 
 	?>

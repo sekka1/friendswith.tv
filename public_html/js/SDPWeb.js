@@ -288,7 +288,7 @@ function contentDidChange(deviceId, oldChannel, newChannel, contentTitle, series
 	console.log('contentDidChange('+deviceId+','+oldChannel+','+newChannel+','+contentTitle+','+seriesTitle+','+contentImage+')');
 
 	// replace the content image
-	if (!contentImage) contentImage = 'images/generic.jpg';
+	if (!contentImage) contentImage = '/img/generic.jpg';
 	document.getElementById('contentTable-'+deviceId).style.backgroundImage = 'url('+contentImage+')';	
 
 	// replace the content title

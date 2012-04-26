@@ -11,7 +11,7 @@ class DeviceController extends AppController {
 	}
 	
 	function context(){
-		//$this->_sdp_init();
+		$this->_sdp_init();
 		//$devices = $this->sdp->devices();
 		$devices = $this->sdp->devices();
 		$this->log($devices,'devices');
@@ -33,7 +33,6 @@ class DeviceController extends AppController {
 	
 	function action(){
 		$this->autoRender = false;
-		$this->log($_SERVER['REQUEST_URI'],'actions');
 		$this->sdp->perform_action();
 	}
 	

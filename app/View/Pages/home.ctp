@@ -39,7 +39,9 @@ $(function() {
 	$("#add-checkin").click(function(e) {
 		var checkin = new Checkin({
 			user_id : $('#add-userId').val(),
-			content_id : $('#add-contentId').val()
+			content_id : $('#add-contentId').val(),
+			content_title : $('#add-contentTitle').val(),
+			schedule_id : $('#add-scheduleId').val()
 		});
 		checkin.save();
 	});
@@ -47,7 +49,9 @@ $(function() {
 	$("#add-share").click(function(e) {
 		var share = new Share({
 			user_id : $('#add-userId').val(),
-			content_id : $('#add-contentId').val()
+			content_id : $('#add-contentId').val(),
+			content_title : $('#add-contentTitle').val(),
+			schedule_id : $('#add-scheduleId').val()
 		});
 		share.save();
 	});
