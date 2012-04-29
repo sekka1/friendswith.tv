@@ -46,7 +46,7 @@ class AppController extends Controller {
      */
     function beforeFilter() {
         $this->Auth->allow('display','services');
- 		//$this->_sdp_init();
+ 		$this->_sdp_init();
 	}
 		/**
 	 * 

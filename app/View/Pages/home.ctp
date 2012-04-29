@@ -2,8 +2,12 @@
 	if(!$this->Session->check('Auth.User')){
 		$this->layout = 'splash';
 	}
-	
-	$devices = $sdp->devices(); 
+
+	$devices = false;
+	if(!empty($sdp)){
+		$devices = $sdp->devices();
+	}
+	 
 	if($devices){
 		echo $this->element('device_context');
 ?>
