@@ -33,6 +33,8 @@
 	Router::connect('/docs/*', array('controller' => 'pages', 'action' => 'display'));
 	Router::connect('/sdp_login', array('controller' => 'pages', 'action' => 'display', 'sdp_login'));
 	Router::connect('/dashboard', array('controller' => 'pages', 'action' => 'display', 'dashboard'));
+	Router::connect('/ap/', array('controller' => 'platform', 'action' => 'index'));
+	Router::connect('/start/', array('controller' => 'pages', 'action' => 'display','start'));
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */

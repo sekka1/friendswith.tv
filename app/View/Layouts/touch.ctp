@@ -8,10 +8,7 @@
 		echo $this->Html->script('SDPWeb');
 		$rawOutput = Configure::read('debug');
 		echo $this->Html->meta('icon'),"\n\t";
-		//echo $this->AssetCompress->css('splash_page.css'),"\n\t";
 		echo $this->AssetCompress->css('all.css', $options=array('raw'=>$rawOutput)),"\n\t";
-		
-		
 		echo $this->AssetCompress->includeCss();
 		echo $this->fetch('css');
 		echo $this->AssetCompress->script('libs.js', $options=array('raw'=>$rawOutput)),"\n\t";
@@ -70,26 +67,8 @@
 			<?php echo $this->Session->flash(); ?>
 			<?php echo $this->fetch('content'); ?>
 		</div>
-		<div id="modal"></div>
     </div> <!-- /container -->
-<script id="servicechooser" type="text/html">
-  <div class="modal-header">
-    <h2>This is a modal!</h2>
-  </div>
-  <div class="modal-body">
-    <p>With some content in it!</p>
-  </div>
-  <div class="modal-footer">
-    <button class="btn">cancel</button>
-    <button class="btn-default">Ok</button>
-  </div>
-</script>
-
-
 	<?php
-	
-		echo $this->element('service_chooser');
-		echo $this->element('templates/start');
 		echo $this->element('templates/device');
 		echo $this->Facebook->init();  
 		if(env('REMOTE_ADDR')!='127.0.0.1') echo $this->element('js/ga');

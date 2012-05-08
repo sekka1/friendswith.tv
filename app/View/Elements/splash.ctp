@@ -27,7 +27,7 @@
 	</ul>
 	<footer>
 		<div>
-			<a href="https://api.sdp.nds.com/oauth/authorize?client_id=<?php echo SDP_API_ID; ?>"><img src="/img/friends_with_tv_logo_splash.png" /></a>
+			<a href="#" onclick="FWTV.start(); return false;"><img src="/img/friends_with_tv_logo_splash.png" /></a>
 			<h4>Coming Soon to your TV</h4>
 			<p>Media inquiries contact <a href="mailto:media@friendswith.tv">media@friendswith.tv</a></p>
 			<small>&copy; 2012 Friendswith.TV. All Rights Reserved</small>

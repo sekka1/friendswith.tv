@@ -1,7 +1,29 @@
 <?php 
+App::uses('Rovi','Lib');
 class PlatformController extends AppController {
 	
 	public $uses = array();
+	
+	function index(){
+		$gridschedule = false;
+		//$service_id = $this->Cookie->read('service_id');
+		$service_id = @$_COOKIE['service_id'];
+		if(!empty($service_id)){
+			$rovi = new Rovi();
+			$gridschedule = $rovi->gridschedule($service_id);
+			//debug($gridschedule);
+			$gridschedule = json_decode($gridschedule,true);
+			$gridschedule = $gridschedule['GridScheduleResult'];
+			$this->Session->setFlash('Found service provider');
+		}else{
+			$this->Session->setFlash('Could not find service provider');
+		}
+		$this->set(compact('gridschedule','service_id'));
+	}
+	
+	function _grid_rovi(){}
+	function _grid_sdp(){
+	}
 	
 	function content($content_id){
 		App::import('Libs','SDPContent');

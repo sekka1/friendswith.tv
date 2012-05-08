@@ -14,6 +14,7 @@ class AppController extends Controller {
 	);
 	
     public $components = array(
+    	'Cookie',
         'Session',
     	'RequestHandler',
         'Auth' => array(

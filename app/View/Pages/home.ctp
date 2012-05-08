@@ -1,6 +1,6 @@
 <?php 
 	if(!$this->Session->check('Auth.User')){
-		$this->layout = 'splash';
+		//$this->layout = 'splash';
 	}
 
 	$devices = false;

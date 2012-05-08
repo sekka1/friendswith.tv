@@ -4,6 +4,7 @@ class Rovi {
 	
 	var $apiBaseUrl = '';
 	var $apiKey = '2x299srgs39qa57vrvvwaqgc';
+	var $apiSecret = 'M26g4bdtjY';
 	var $params = array(
 		'format'=>'json',
 		'locale'=>'en-US',
@@ -21,7 +22,7 @@ class Rovi {
 			$url = 'http://api.rovicorp.com/TVlistings/v9/listings/services/postalcode/';
 			$url .=$zip_code;
 			$url .='/info';
-			$response = $this->_request($url);
+			$response = $this->_request($url,$this->params);
 			if($response){
 				Cache::write($zip_code,$response,'services');
 			}
@@ -34,7 +35,7 @@ class Rovi {
 			$url = 'http://api.rovicorp.com/TVlistings/v9/listings/services/postalcode/';
 			$url .=$zip_code;
 			$url .='/info';
-			$response = $this->_request($url);
+			$response = $this->_request($url,$this->params);
 			if($response){
 				Cache::write($zip_code,$response,'services');
 			}
@@ -42,13 +43,39 @@ class Rovi {
 		return $response;    
 	}
 	
-	function _request($url){
+	function gridschedule($service_id, $params = array()){
+		$defaults = array(
+			'duration'=>120,
+			//'sourcefilterexclude'=>'PPV,Music'
+		);
+		$this->params = array_merge($this->params,$defaults,$params);
+		$key = 'gridschedule3'.$service_id;
+		if(($response = Cache::read($key))===false){
+			$url = 'http://api.rovicorp.com/TVlistings/v9/listings/gridschedule/'.$service_id.'/info';
+			$this->params['sig']=$this->_signRequest();
+			$response = $this->_request($url,$this->params);
+			if($response){
+				Cache::write($key,$response);
+			}
+		}
+				
+		return $response;
+	}
+	
+	function _request($url, $params = array()){
 		$http = new HttpSocket();
-		$response = $http->get($url,$this->params);
+		$response = $http->get($url, $params);
 		if($response->isOk()){
 			return $response->body;
+		}else{
+			debug($response);
 		}
 		return false;
+	}
+	
+	function _signRequest(){
+		$signature = md5($this->apiKey.$this->apiSecret.time());
+		return $signature;
 	}
 }
 ?>

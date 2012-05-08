@@ -8,4 +8,5 @@ $(document).ready(function(){
 	}else{
 		console.log('no devices');
 	}
+	//FWTV.start();
 });
